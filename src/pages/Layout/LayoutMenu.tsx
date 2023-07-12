@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {
-  BrowserRouter as Router, Route, Routes, useNavigate, Outlet
+  BrowserRouter as Router, Route, Routes, useNavigate, Outlet, useLocation
   } from 'react-router-dom';
   import { useSelector, useDispatch } from "react-redux";
 import {
@@ -69,6 +69,8 @@ const LayoutMenu: React.FC = () => {
   const onJump = (e:any) => {
     navigate(e.key);
   };
+  const location = useLocation();
+  const { pathname } = location;
   return (
     <div className="layout">
       <div style={{ width: collapsed ? 80 : 256 }} className='menu'>
@@ -76,7 +78,7 @@ const LayoutMenu: React.FC = () => {
           {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
         </Button> */}
         <Menu
-          defaultSelectedKeys={['/layout/dashboard']}
+          defaultSelectedKeys={[pathname]}
           defaultOpenKeys={['sub1']}
           mode="inline"
           theme="dark"
@@ -90,14 +92,7 @@ const LayoutMenu: React.FC = () => {
         {/* header */}
         <LayoutHeader />
         {/* 路由出口 */}
-        <Routes >
-        {
-          array.map((v) => {
-            return <Route path={v.key} Component={v.component} key={v.key}></Route>
-          })
-        }
-        </Routes>
-        
+        <Outlet />
       </div>
     </div>
     

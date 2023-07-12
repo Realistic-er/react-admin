@@ -14,7 +14,7 @@ import '../style/components/layoutheader.scss';
 
 const LayoutHeader:React.FC = () => {
     const dispatch = useDispatch();
-    const collapsed = useSelector(selectCollapse);
+    const collapsed = JSON.parse(window.localStorage.getItem('collapsed') as string);
     const toggleCollapsed = () => {
         dispatch(updateCollapsed());
     };

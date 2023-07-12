@@ -7,6 +7,7 @@ import routeconfig from '../utils/router/RouteConfig';
 import {
     selectAccount,
   } from "../store/reducer/saveaccount";
+import { Spin } from 'antd';
 const LoginMoudle = lazy(() => import('../pages/Login/LoginMoudle'));
 const LayoutMenu = lazy(() => import('../pages/Layout/LayoutMenu'));
 
@@ -19,7 +20,7 @@ const routes:React.FC = () => {
         <Router>
             <Suspense>
                 <Routes>
-                    <Route path='/login' Component={LoginMoudle}></Route>
+                    <Route path='' Component={LoginMoudle}></Route>
                     <Route path='/layout/*' Component={LayoutMenu}>
                         {
                            routeconfig.map((v) => {

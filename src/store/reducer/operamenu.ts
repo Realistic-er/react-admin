@@ -9,8 +9,8 @@ export const collapseSlice = createSlice({
     // reducer函数 state当前组件的数据 
     //第二个参数为{payload:{},type:"""} 想想就写法或者vuex
     updateCollapsed(state) {
-        console.log('111');
         state.collapsed = !state.collapsed;
+        window.localStorage.setItem('collapsed', JSON.stringify(state.collapsed));
     },
   },
 });

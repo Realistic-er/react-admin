@@ -24,7 +24,6 @@ const onFinish = (values: any) => {
     const user = useSelector(selectAccount);
     const [form] = Form.useForm();
     const onSubmit = (errorInfo: any) => {
-        console.log('112');
         form.validateFields()
             .then((values) => {
                 dispatch(updateAccount(values.username));
