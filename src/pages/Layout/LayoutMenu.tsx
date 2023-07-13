@@ -17,8 +17,7 @@ import {
   PieChartOutlined,
 } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
-import { Button, Menu } from 'antd';
-import array from '../../utils/router/RouteConfig';
+import { Menu } from 'antd';
 import '../../style/pages/LayoutMenu.scss';
 import LayoutHeader from '../../components/LayoutHeader';
 
@@ -58,6 +57,12 @@ const items = [
           label: '数据监控',
           auth: ['admin', 'visit'],
           icon: <DesktopOutlined />,
+        },
+        {
+          key: '/layout/monitor/partmonitor',
+          label: '部门监控',
+          auth: ['admin', 'visit'],
+          icon: <MailOutlined />,
         }
       ]
   },

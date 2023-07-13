@@ -5,6 +5,7 @@ import {
   } from '@ant-design/icons';
 import type { ColumnsType } from 'antd/es/table';
 import Adddata from '../../components/datamonitor/Adddata';
+import Paginationcom from '../../components/Paginationcom';
 import getdata from '../../utils/api/datamonitor';
 import '../../style/views/datamonitor.scss';
 interface DataType {
@@ -14,10 +15,6 @@ interface DataType {
   email: string;
   text: string;
 }
-
-
-
-// let data: DataType[] = [];
 
 const Datamonitor: React.FC = () => {
     const childRef = useRef();
@@ -65,7 +62,7 @@ const Datamonitor: React.FC = () => {
           <Space size="middle">
               {/* <a>Invite {record.name}</a>
               <a>Delete</a> */}
-              <Button type="link" onClick={() => edit(record)}>编辑</Button>
+              <Button type="link" >编辑</Button>
               <Popconfirm
                   title="删除"
                   description={'确认要删除'+ `${record.dataname}`+'?'}
@@ -86,18 +83,20 @@ const Datamonitor: React.FC = () => {
           setData(Response.data.data.data)
         })
     }, []);
-    const [messageApi, contextHolder] = message.useMessage();
     const confirm = () =>{
-        messageApi.open({
-          type: 'success',
+        message.success({
           content: '删除成功',
         });
     };
     const cancel = () =>{
-        messageApi.open({
-            type: 'warning',
-            content: '取消删除',
+        message.warning({
+          content: '取消删除',
         });
+    };
+    const changePagination = (page:number, pageSize:number) =>{
+      message.success({
+        content: `当前页码为${page},页数量为${pageSize}`,
+      });
     };
     const edit = (record:DataType) => {
       (childRef.current as any).showModalEdit(record);
@@ -106,13 +105,21 @@ const Datamonitor: React.FC = () => {
       (childRef.current as any).showModal();
     };
     return (
-        <div className="datamonitor">
+      <div className="fathercontainer">
+        <div>
           <Button type="primary" onClick={clickBtn}>新增</Button>
+        </div>
+        <div className="datamonitor">
           <Table columns={columns} rowKey={"dataname"}
           dataSource={data} pagination={false} bordered={true}/>
+          {/*  */}
           <Adddata ref={childRef} />
+          {/*  */}
         </div>
-        
+        <div className="page">
+          <Paginationcom onChange={changePagination}/>
+        </div>
+      </div>
     )
     
 }
