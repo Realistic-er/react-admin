@@ -1,15 +1,15 @@
 import React, { useState, forwardRef, useImperativeHandle, useEffect } from 'react';
-import { Button, Modal, Form, Input, message, Radio, Upload } from 'antd';
+import { Upload, Modal, Form, Input, message, InputNumber, Select } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 import type { UploadFile } from 'antd/es/upload/interface';
 import type { RcFile, UploadProps } from 'antd/es/upload';
 
 interface arraytype {
-  uid: string,
-  name: string,
-  url: string,
+    uid: string,
+    name: string,
+    url: string,
 }
-const Addpart: React.FC<any> = forwardRef(
+const Addprocess: React.FC<any> = forwardRef(
     (props, ref) => {
       useImperativeHandle(ref, () => {
         return {
@@ -19,8 +19,8 @@ const Addpart: React.FC<any> = forwardRef(
       });
         const [isModalOpen, setIsModalOpen] = useState(false);
         const [recordobject, setIsRecord] = useState({});
-        const [form] = Form.useForm();
         const [fileList, setFileList] = useState<UploadFile[]>([]);
+        const [form] = Form.useForm();
         useEffect(() => {
           form.setFieldsValue({...recordobject})
         }, [recordobject])
@@ -33,9 +33,9 @@ const Addpart: React.FC<any> = forwardRef(
         const showModalEdit = (record:any) => {
           setIsModalOpen(true);
           setIsRecord(record);
-          
+
           const array:arraytype[] = [];
-          record.invoice.forEach((v:string) => {
+          record.processimage.forEach((v:string) => {
             const obj = {
               uid: '',
               name: '',
@@ -50,7 +50,6 @@ const Addpart: React.FC<any> = forwardRef(
         const handleOk = () => {
           form.validateFields()
             .then((values) => {
-              console.log(values);
               message.success({
                 content: '提交成功'
               })
@@ -75,14 +74,24 @@ const Addpart: React.FC<any> = forwardRef(
         const onFinishFailed = (errorInfo: any) => {
           console.log('Failed:', errorInfo);
         };
-        
+        const options = [
+            { value: '1', label: 'Jack' },
+            { value: '2', label: 'Lucy' },
+            { value: '3', label: 'yiminghe' },
+        ];
+        const optionsMulti = [
+            { value: '1', label: '监督' },
+            { value: '2', label: '审核' },
+            { value: '3', label: '执行' },
+        ];
+
         const uploadButton = (
             <div>
               <PlusOutlined />
               <div style={{ marginTop: 8 }}>Upload</div>
             </div>
         );
-        
+
         const normFile = (e: any) => {
             if (Array.isArray(e)) {
               return e;
@@ -93,12 +102,11 @@ const Addpart: React.FC<any> = forwardRef(
         const handleChange: UploadProps['onChange'] = ({ fileList: newFileList }) =>{
           setFileList(newFileList);
         };
-        
         return (
           <Modal title="创建" open={isModalOpen} okText="提交" cancelText="取消" destroyOnClose={true}
             onOk={handleOk} onCancel={handleCancel} forceRender>
               <Form
-              name="basic"
+              name="basicprocess"
               form={form}
               style={{ maxWidth: 600 }}
               initialValues={{ remember: true }}
@@ -108,24 +116,50 @@ const Addpart: React.FC<any> = forwardRef(
               preserve={false}
             >
               <Form.Item
-              label="申请人"
-              name="partname"
-              rules={[{ required: true, message: '申请人不能为空!' }]}
+              label="负责人"
+              name="processname"
+              rules={[{ required: true, message: '负责人不能为空!' }]}
               >
-                <Input placeholder="请输入你的姓名"/>
+                <Select
+                    allowClear
+                    placeholder="请选择负责人"
+                    options={options}
+                />
               </Form.Item>
       
               <Form.Item
-              label="职位"
-              name="part"
-              rules={[{ required: true, message: '职位不能为空!' }]}
+              label="责任"
+              name="process"
+              rules={[{ required: true, message: '责任不能为空!' }]}
               >
-                <Input placeholder="请输入你的职位"/>
+                <Select
+                    mode="multiple"
+                    allowClear
+                    style={{ width: '100%' }}
+                    placeholder="请选择责任"
+                    options={optionsMulti}
+                />
               </Form.Item>
 
-              <Form.Item label="发票" name="invoice"
+              <Form.Item
+              label="进度"
+              name="statusprocess"
+              rules={[{ required: true, message: '状态不能为空!' }]}
+              >
+                <InputNumber min={0} max={100}/>
+              </Form.Item>
+
+              <Form.Item
+              label="email"
+              name="email"
+              rules={[{ required: true, message: 'email不能为空!' }]}
+              >
+                <Input placeholder="请输入你的email"/>
+              </Form.Item>
+
+              <Form.Item label="现场图片" name="processimage"
               getValueFromEvent={normFile}
-              rules={[{ required: true, message: '发票不能为空!' }]}>
+              rules={[{ required: true, message: '现场图片不能为空!' }]}>
                 <Upload
                 listType="picture-card"
                 fileList={fileList}
@@ -134,6 +168,7 @@ const Addpart: React.FC<any> = forwardRef(
                 </Upload>
             </Form.Item>
 
+
               <Form.Item
               label="备注"
               name="text"
@@ -141,6 +176,9 @@ const Addpart: React.FC<any> = forwardRef(
               >
                 <Input placeholder="请输入备注"/>
               </Form.Item>
+
+
+              
           </Form>
           </Modal>
         );
@@ -148,6 +186,6 @@ const Addpart: React.FC<any> = forwardRef(
     
 );
 
-Addpart.displayName = 'Addpart';
+Addprocess.displayName = 'Addprocess';
 
-export default Addpart;
+export default Addprocess;

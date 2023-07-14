@@ -24,7 +24,7 @@ const routes:React.FC = () => {
                     <Route path='/layout/*' Component={LayoutMenu}>
                         {
                            routeconfig.map((v) => {
-                                return <Route element={ user !== null && v.auth.indexOf(user) !== -1  ? <v.component /> : <Navigate to='LoginMoudle' /> }
+                                return <Route element={ user !== null && v.auth.indexOf(user) !== -1  ? <v.component /> : <Navigate to='' /> }
                                 path={v.key} key={v.key} />
                            }) 
                         }

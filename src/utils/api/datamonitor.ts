@@ -11,7 +11,7 @@ const dataList = Mock.mock(
         // 字典类型
         "dataage|1-100": 100,
         // 状态
-        'status|1': [
+        'statusdata|1': [
           '1',
           '2',
         ],

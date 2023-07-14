@@ -12,8 +12,8 @@ interface routetype {
 const DashBoard = lazy(() => import('../../views/dashboard/DashBoard'));
 const DataMonitor = lazy(() => import('../../views/monitor/DataMonitor'));
 const Partmonitor = lazy(() => import('../../views/monitor/partmonitor'));
+const Processmonitor = lazy(() => import('../../views/monitor/ProcessMonitor'));
 
-const user = window.localStorage.getItem('account');
 
 const routeconfig = [
     {
@@ -34,6 +34,12 @@ const routeconfig = [
         label: '部门监控',
         auth: ['admin', 'visit'],
         component: Partmonitor,
-    }
+    },
+    {
+        key: 'monitor/processmonitor',
+        label: '流程监控',
+        auth: ['admin', 'visit'],
+        component: Processmonitor,
+    },
 ];
 export default routeconfig;

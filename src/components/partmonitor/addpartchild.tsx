@@ -8,7 +8,7 @@ const Addpartchild: React.FC<any> = forwardRef(
     (props, ref) => {
       useImperativeHandle(ref, () => {
         return {
-          showModalExpanExpan: showModalExpan,
+          showModalExpand: showModalExpand,
           showModalExpanEdit: showModalExpanEdit,
         };
       });
@@ -18,7 +18,7 @@ const Addpartchild: React.FC<any> = forwardRef(
         useEffect(() => {
           form.setFieldsValue({...recordobject})
         }, [recordobject])
-        const showModalExpan = () => {
+        const showModalExpand = () => {
           setIsModalOpen(true);
           form.resetFields();
         };

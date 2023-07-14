@@ -63,7 +63,13 @@ const items = [
           label: '部门监控',
           auth: ['admin', 'visit'],
           icon: <MailOutlined />,
-        }
+        },
+        {
+          key: '/layout/monitor/processmonitor',
+          label: '流程监控',
+          auth: ['admin', 'visit'],
+          icon: <MenuFoldOutlined />,
+        },
       ]
   },
 ];

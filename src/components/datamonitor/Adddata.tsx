@@ -84,7 +84,7 @@ const Adddata: React.FC<any> = forwardRef(
 
               <Form.Item
               label="状态"
-              name="status"
+              name="statusdata"
               rules={[{ required: true, message: '状态不能为空!' }]}
               >
                 <Radio.Group>

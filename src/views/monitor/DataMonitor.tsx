@@ -11,7 +11,7 @@ import '../../style/views/datamonitor.scss';
 interface DataType {
   dataname: string;
   dataage: number;
-  status: string;
+  statusdata: string;
   email: string;
   text: string;
 }
@@ -36,11 +36,11 @@ const Datamonitor: React.FC = () => {
       },
       {
         title: '状态',
-        dataIndex: 'status',
-        key: 'status',
-        render: (_, { status }) => (
-            <Tag color={ status === '1' ? 'blue' : 'red' }>
-                { status === '1' ? '正常' : '停用' }
+        dataIndex: 'statusdata',
+        key: 'statusdata',
+        render: (_, { statusdata }) => (
+            <Tag color={ statusdata === '1' ? 'blue' : 'red' }>
+                { statusdata === '1' ? '正常' : '停用' }
             </Tag>
         ),
       },
@@ -62,7 +62,7 @@ const Datamonitor: React.FC = () => {
           <Space size="middle">
               {/* <a>Invite {record.name}</a>
               <a>Delete</a> */}
-              <Button type="link" >编辑</Button>
+              <Button type="link" onClick={() => edit(record)}>编辑</Button>
               <Popconfirm
                   title="删除"
                   description={'确认要删除'+ `${record.dataname}`+'?'}
@@ -110,7 +110,7 @@ const Datamonitor: React.FC = () => {
           <Button type="primary" onClick={clickBtn}>新增</Button>
         </div>
         <div className="datamonitor">
-          <Table columns={columns} rowKey={"dataname"}
+          <Table columns={columns} rowKey={"dataname"} scroll={{ y: 600 }}
           dataSource={data} pagination={false} bordered={true}/>
           {/*  */}
           <Adddata ref={childRef} />

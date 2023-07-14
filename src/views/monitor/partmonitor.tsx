@@ -29,7 +29,7 @@ const items = [
     { key: '2', label: 'Action 2' },
 ];
 const Partmonitor: React.FC = () => {
-    const childRef = useRef();
+    const childRefPart = useRef();
     const childExpandRef = useRef();
     
     const expandedRowRender = (record:DataType) => {
@@ -37,6 +37,7 @@ const Partmonitor: React.FC = () => {
       const editExpand = (record:DataType) => {
         (childExpandRef.current as any).showModalExpanEdit(record);
       };
+      
         const columns: TableColumnsType<ExpandedDataType> = [
           {
             title: '序号',
@@ -79,10 +80,7 @@ const Partmonitor: React.FC = () => {
         dataSource={record.childlist}
         pagination={false} />;
     };
-    // 
-    const addExpand = () => {
-      (childExpandRef.current as any).showModal();
-    };
+    
     
     
     // 
@@ -108,7 +106,12 @@ const Partmonitor: React.FC = () => {
       });
     };
     const editPart = (record:DataType) => {
-      (childRef.current as any).showModalEdit(record);
+      (childRefPart.current as any).showModalEdit(record);
+    };
+    // 
+    // 
+    const addExpand = () => {
+      (childExpandRef.current as any).showModalExpand();
     };
     const columns: TableColumnsType<DataType> = [
         {
@@ -199,7 +202,7 @@ const Partmonitor: React.FC = () => {
         });
     };
     const clickBtn = () =>{
-      (childRef.current as any).showModal();
+      (childRefPart.current as any).showModal();
     };
     
     return (
@@ -218,7 +221,7 @@ const Partmonitor: React.FC = () => {
                 scroll={{ y: 600 }}
             />
             {/*  */}
-            <Addpart ref={childRef} />
+            <Addpart ref={childRefPart} />
             {/*  */}
             <Addpartchild ref={childExpandRef} />
         </div>
