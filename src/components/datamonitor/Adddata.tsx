@@ -59,6 +59,7 @@ const Adddata: React.FC<any> = forwardRef(
               <Form
               name="basic"
               form={form}
+              labelCol={{ span: 4 }}
               style={{ maxWidth: 600 }}
               initialValues={{ remember: true }}
               onFinish={onFinish}

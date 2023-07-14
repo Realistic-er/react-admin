@@ -33,7 +33,6 @@ const Addprocess: React.FC<any> = forwardRef(
         const showModalEdit = (record:any) => {
           setIsModalOpen(true);
           setIsRecord(record);
-
           const array:arraytype[] = [];
           record.processimage.forEach((v:string) => {
             const obj = {
@@ -108,6 +107,8 @@ const Addprocess: React.FC<any> = forwardRef(
               <Form
               name="basicprocess"
               form={form}
+              labelCol={{ span: 4 }}
+              // wrapperCol={{ span: 16 }}
               style={{ maxWidth: 600 }}
               initialValues={{ remember: true }}
               onFinish={onFinish}

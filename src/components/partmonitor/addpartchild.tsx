@@ -63,6 +63,7 @@ const Addpartchild: React.FC<any> = forwardRef(
               <Form
               name="addpart"
               form={form}
+              labelCol={{ span: 4 }}
               style={{ maxWidth: 600 }}
               initialValues={{ remember: true }}
               onFinish={onFinish}

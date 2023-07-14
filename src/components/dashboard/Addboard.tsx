@@ -58,6 +58,7 @@ const Addboard: React.FC<any> = forwardRef(
             onOk={handleOk} onCancel={handleCancel} forceRender>
               <Form
               name="basic"
+              labelCol={{ span: 4 }}
               form={form}
               style={{ maxWidth: 600 }}
               initialValues={{ remember: true }}

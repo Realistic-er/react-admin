@@ -27,7 +27,7 @@ const Processmonitor: React.FC = () => {
     const columns: ColumnsType<DataType> = [
         {
             title: '序号',
-            width: 30,
+            width: 80,
             render:(text,record,index)=>`${index+1}`,
         },
         {

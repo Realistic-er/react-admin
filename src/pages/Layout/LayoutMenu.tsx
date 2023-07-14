@@ -7,6 +7,10 @@ import {
     selectCollapse,
     updateCollapsed,
   } from "../../store/reducer/operamenu";
+  import {
+    selectTagArray,
+    updateTagArray,
+  } from "../../store/reducer/tagopera";
 import {
   AppstoreOutlined,
   ContainerOutlined,
@@ -76,21 +80,25 @@ const items = [
 
 const LayoutMenu: React.FC = () => {
   const collapsed = useSelector(selectCollapse);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const onJump = (e:any) => {
+    dispatch(updateTagArray(e.key));
     navigate(e.key);
   };
   const location = useLocation();
   const { pathname } = location;
   return (
     <div className="layout">
-      <div style={{ width: collapsed ? 80 : 256 }} className='menu'>
+      <div  className='menu'>
         {/* <Button type="primary" onClick={toggleCollapsed} style={{ marginBottom: 16 }}>
           {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
         </Button> */}
         <Menu
           defaultSelectedKeys={[pathname]}
-          defaultOpenKeys={['sub1']}
+          style={{ width: collapsed ? 80 : 256 }}
+          // defaultOpenKeys={['sub1']}
+          selectedKeys={[pathname]}
           mode="inline"
           theme="dark"
           inlineCollapsed={collapsed}
