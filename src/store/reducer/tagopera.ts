@@ -13,6 +13,10 @@ const routearray  = [
         key: '/layout/monitor/processmonitor',
         label: '流程监控',
     },
+    {
+        key: '/layout/monitor/salemonitor',
+        label: '货品监控',
+    },
 ];
 const initialState = {
     tagarray: [

@@ -69,10 +69,10 @@ const items = [
           icon: <MailOutlined />,
         },
         {
-          key: '/layout/monitor/processmonitor',
-          label: '流程监控',
+          key: '/layout/monitor/salemonitor',
+          label: '货品监控',
           auth: ['admin', 'visit'],
-          icon: <MenuFoldOutlined />,
+          icon: <PieChartOutlined />,
         },
       ]
   },
