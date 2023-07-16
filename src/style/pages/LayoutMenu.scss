@@ -1,14 +1,34 @@
 .layout {
     height: 100%;
-    display: flex;
     .menu {
         height: 100%;
+        position: fixed;
+        left: 0;
         ul {
             height: 100%;
         }
     }
-    .outlet {
-        flex: 1;
+    // style={{marginLeft: collapsed ? '80px' : '256px',}}
+    .outletchange {
         padding: 20px;
+        overflow-x: hidden;
+        margin-left: 80px;
+        animation: mymove 1s infinite;
+        -webkit-animation: mymove 1s infinite;
+        animation-iteration-count: 1;
+    }
+    .outlet {
+        padding: 20px;
+        // overflow-x: hidden;
+        margin-left: 256px;
+        
+    }
+    @keyframes mymove {
+        0% {
+            margin-left: 256px;
+        }
+        100% {
+            margin-left: 80px;
+        }
     }
 }

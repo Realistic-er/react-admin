@@ -15,9 +15,10 @@ import {
     MenuFoldOutlined,
     MenuUnfoldOutlined,
     UserOutlined,
-    CloseOutlined,
+    GithubOutlined,
+    WechatOutlined
   } from '@ant-design/icons';
-import { Button, Avatar, Tag } from 'antd';
+import { Button, Avatar, Tag, Space, Popover, Image } from 'antd';
 import '../style/components/layoutheader.scss';
 
 interface tageType {
@@ -33,15 +34,28 @@ const LayoutHeader:React.FC = () => {
     const toggleCollapsed = () => {
         dispatch(updateCollapsed());
     };
-    const close = (item:tageType) => {
-        const index = tagArray.indexOf(item);
-        const path = tagArray[index-1].key;
-        navigate(path);
-        dispatch(deleteTagArray(item));
+    const close = (e:React.MouseEvent<HTMLElement>,item:tageType) => {
+        e.preventDefault();
+        const currentpath = location.pathname;
+        if (currentpath === item.key) {
+            const index = tagArray.indexOf(item);
+            const path:string = tagArray[index-1].key;
+            navigate(path);
+            dispatch(deleteTagArray(item));
+        } else {
+            dispatch(deleteTagArray(item));
+        }
     };
     const jump = (item:tageType) => {
         navigate(item.key);
     };
+    const content = (
+        // <img style={{width:'100px'}} src={require('../assets/wechat.jpg')}></img>
+        <Image
+            width={200}
+            src={require('../assets/wechat.jpg')}
+        />
+    );
     return (
         <div className="layoutheader">
             <div className="top">
@@ -51,17 +65,25 @@ const LayoutHeader:React.FC = () => {
                 </Button>
                 {/*  */}
                 <div className="right">
+                <Space size="middle">
+                    <Popover placement="bottom" title="加我微信" content={content} trigger="click">
+                        <WechatOutlined />
+                    </Popover>
+                    <a href='https://github.com/Realistic-er/react-admin'>
+                        <GithubOutlined />
+                    </a>
+                    
                     <Avatar style={{ backgroundColor: '#87d068' }} icon={<UserOutlined />} />
+                </Space>
+                    
                 </div>
             </div>
             <div className="bottom">
                 {
                     tagArray.map((item:tageType,index:number) => {
-                        return <Tag key={index} color={item.key === location.pathname ? '#108ee9' : 'purple'} onClick={() => jump(item)}>
+                        return <Tag key={index} closable={item.label === '首页' ? false : true} color={item.key === location.pathname ? '#108ee9' : 'purple'}
+                        onClick={() => jump(item)} onClose={(e) => close(e,item)}>
                         {item.label}
-                        {
-                            item.label === '首页' ? null : <CloseOutlined style={{marginLeft: '15px'}} onClick={() => close(item)}/>
-                        }
                       </Tag>
                     })
                 }

@@ -46,7 +46,11 @@ export const tagsSlice = createSlice({
     },
     // 删除标签
     deleteTagArray(state, actions) {
-        const index = state.tagarray.indexOf(actions.payload);
+        // const index = state.tagarray.indexOf(actions.payload);
+        const index = state.tagarray.findIndex(item => {
+            return item.key === actions.payload.key;
+        })
+        console.log(index);
         state.tagarray.splice(index, 1);
     },
   },

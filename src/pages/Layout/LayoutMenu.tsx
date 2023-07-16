@@ -17,8 +17,9 @@ import {
   DesktopOutlined,
   MailOutlined,
   MenuFoldOutlined,
-  MenuUnfoldOutlined,
+  SlidersOutlined,
   PieChartOutlined,
+  
 } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
 import { Menu } from 'antd';
@@ -69,6 +70,12 @@ const items = [
           icon: <MailOutlined />,
         },
         {
+          key: '/layout/monitor/processmonitor',
+          label: '流程监控',
+          auth: ['admin', 'visit'],
+          icon: <SlidersOutlined />,
+        },
+        {
           key: '/layout/monitor/salemonitor',
           label: '货品监控',
           auth: ['admin', 'visit'],
@@ -96,7 +103,7 @@ const LayoutMenu: React.FC = () => {
         </Button> */}
         <Menu
           defaultSelectedKeys={[pathname]}
-          style={{ width: collapsed ? 80 : 256 }}
+          style={{ width: collapsed ? '80px' : '256px' }}
           // defaultOpenKeys={['sub1']}
           selectedKeys={[pathname]}
           mode="inline"
@@ -107,7 +114,7 @@ const LayoutMenu: React.FC = () => {
         />
       </div>
       {/*  */}
-      <div className="outlet">
+      <div className={collapsed ? 'outletchange' : 'outlet'} >
         {/* header */}
         <LayoutHeader />
         {/* 路由出口 */}

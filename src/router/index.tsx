@@ -20,7 +20,7 @@ const routes:React.FC = () => {
         <Router>
             <Suspense>
                 <Routes>
-                    <Route path='' Component={LoginMoudle}></Route>
+                    <Route path=''  Component={LoginMoudle}></Route>
                     <Route path='/layout/*' Component={LayoutMenu}>
                         {
                            routeconfig.map((v) => {
