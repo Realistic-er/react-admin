@@ -19,7 +19,7 @@ import {
     WechatOutlined
   } from '@ant-design/icons';
 import { Button, Avatar, Tag, Space, Popover, Image } from 'antd';
-import '../style/components/layoutheader.scss';
+import styles from  '../style/components/layoutheader.module.scss';
 
 interface tageType {
     label: string,
@@ -57,14 +57,14 @@ const LayoutHeader:React.FC = () => {
         />
     );
     return (
-        <div className="layoutheader">
-            <div className="top">
+        <div className={styles.layoutheader}>
+            <div className={styles.top}>
                 {/* 折叠按钮 */}
                 <Button type="link" onClick={toggleCollapsed} style={{ marginBottom: 16 }}>
                     {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
                 </Button>
                 {/*  */}
-                <div className="right">
+                <div className={styles.right}>
                 <Space size="middle">
                     <Popover placement="bottom" title="加我微信" content={content} trigger="click">
                         <WechatOutlined />
@@ -78,7 +78,7 @@ const LayoutHeader:React.FC = () => {
                     
                 </div>
             </div>
-            <div className="bottom">
+            <div className={styles.bottom}>
                 {
                     tagArray.map((item:tageType,index:number) => {
                         return <Tag key={index} closable={item.label === '首页' ? false : true} color={item.key === location.pathname ? '#108ee9' : 'purple'}

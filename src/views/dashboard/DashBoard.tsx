@@ -5,7 +5,7 @@ import {
   } from '@ant-design/icons';
 import type { ColumnsType } from 'antd/es/table';
 import Addboard from '../../components/dashboard/Addboard';
-import '../../style/views/dashboard.scss';
+import styles from  '../../style/views/dashboard.module.scss';
 
 interface DataType {
     key: React.Key;
@@ -98,7 +98,7 @@ const DashBoard: React.FC = () => {
     };
   return (
     
-      <div className="dashboard">
+      <div className={styles.dashboard}>
           {contextHolder}
           <Button type="primary" onClick={clickBtn}>新增</Button>
           <Table

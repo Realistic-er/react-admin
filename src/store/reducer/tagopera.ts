@@ -17,6 +17,10 @@ const routearray  = [
         key: '/layout/monitor/salemonitor',
         label: '货品监控',
     },
+    {
+        key: '/layout/charge/sourcematerial',
+        label: '素材管理',
+    },
 ];
 const initialState = {
     tagarray: [

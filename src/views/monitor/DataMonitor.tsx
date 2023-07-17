@@ -7,7 +7,7 @@ import type { ColumnsType } from 'antd/es/table';
 import Adddata from '../../components/datamonitor/Adddata';
 import Paginationcom from '../../components/Paginationcom';
 import getdata from '../../utils/api/datamonitor';
-import '../../style/views/datamonitor.scss';
+import styles from  '../../style/views/datamonitor.module.scss';
 interface DataType {
   dataname: string;
   dataage: number;
@@ -105,18 +105,18 @@ const Datamonitor: React.FC = () => {
       (childRef.current as any).showModal();
     };
     return (
-      <div className="fathercontainer">
+      <div className={styles.fathercontainer}>
         <div>
           <Button type="primary" onClick={clickBtn}>新增</Button>
         </div>
-        <div className="datamonitor">
+        <div className={styles.datamonitor}>
           <Table columns={columns} rowKey={"dataname"} scroll={{ y: 600 }}
           dataSource={data} pagination={false} bordered={true}/>
           {/*  */}
           <Adddata ref={childRef} />
           {/*  */}
         </div>
-        <div className="page">
+        <div className={styles.page}>
           <Paginationcom onChange={changePagination}/>
         </div>
       </div>

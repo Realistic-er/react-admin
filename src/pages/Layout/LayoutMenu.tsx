@@ -19,11 +19,11 @@ import {
   MenuFoldOutlined,
   SlidersOutlined,
   PieChartOutlined,
-  
+  DatabaseOutlined
 } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
 import { Menu } from 'antd';
-import '../../style/pages/LayoutMenu.scss';
+import styles from  '../../style/pages/LayoutMenu.module.scss';
 import LayoutHeader from '../../components/LayoutHeader';
 
 type MenuItem = Required<MenuProps>['items'][number];
@@ -83,6 +83,19 @@ const items = [
         },
       ]
   },
+  {
+    key: '/layout/charge',
+    label: '管理',
+    icon: <ContainerOutlined />,
+    children: [
+      {
+        key: '/layout/charge/sourcematerial',
+        label: '素材管理',
+        auth: ['admin', 'visit'],
+        icon: <DatabaseOutlined />,
+      },
+    ]
+},
 ];
 
 const LayoutMenu: React.FC = () => {
@@ -96,8 +109,8 @@ const LayoutMenu: React.FC = () => {
   const location = useLocation();
   const { pathname } = location;
   return (
-    <div className="layout">
-      <div  className='menu'>
+    <div className={styles.layout}>
+      <div  className={styles.menu}>
         {/* <Button type="primary" onClick={toggleCollapsed} style={{ marginBottom: 16 }}>
           {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
         </Button> */}
@@ -114,7 +127,7 @@ const LayoutMenu: React.FC = () => {
         />
       </div>
       {/*  */}
-      <div className={collapsed ? 'outletchange' : 'outlet'} >
+      <div className={collapsed ? `${styles.outletchange}` : `${styles.outlet}`} >
         {/* header */}
         <LayoutHeader />
         {/* 路由出口 */}

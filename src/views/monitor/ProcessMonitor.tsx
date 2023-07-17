@@ -7,7 +7,7 @@ import {
   import Addprocess from '../../components/processmonitor/addprocess';
   import Paginationcom from '../../components/Paginationcom';
 import getprocess from '../../utils/api/processmonitor';
-import '../../style/views/datamonitor.scss';
+import styles from  '../../style/views/datamonitor.module.scss';
 
 interface DataType {
   key: string;
@@ -151,18 +151,18 @@ const Processmonitor: React.FC = () => {
     return (
         
 
-        <div className="fathercontainer">
+        <div className={styles.fathercontainer}>
         <div>
           <Button type="primary" onClick={clickBtn}>新增</Button>
         </div>
-        <div className="datamonitor">
+        <div className={styles.datamonitor}>
         <Table columns={columns} dataSource={data} pagination={false} bordered={true}
         rowKey={"text"} scroll={{ y: 600 }}/>
           {/*  */}
           <Addprocess ref={childRefProcess} />
           {/*  */}
         </div>
-        <div className="page">
+        <div className={styles.page}>
           <Paginationcom onChange={changePagination}/>
         </div>
       </div>

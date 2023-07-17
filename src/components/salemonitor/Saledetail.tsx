@@ -5,7 +5,7 @@ import type { UploadFile } from 'antd/es/upload/interface';
 import type { RcFile, UploadProps } from 'antd/es/upload';
 import type { ColumnsType } from 'antd/es/table';
 import Paginationcom from '../../components/Paginationcom';
-import '../../style/components/saledetail.scss';
+import styles from '../../style/components/saledetail.module.scss';
 
 interface DataType {
     key: string;
@@ -149,12 +149,12 @@ const Addprocess: React.FC<any> = forwardRef(
         return (
           <Modal title="详情" open={isModalOpen} footer="" destroyOnClose={true} width="50%"
             onOk={handleOk} onCancel={handleCancel} forceRender>
-            <div className="fathercontainer">
-                <div className="datamonitor">
+            <div className={styles.fathercontainer}>
+                <div className={styles.datamonitor}>
                     <Table columns={columns} dataSource={recordarray} pagination={false} bordered={true}
                     rowKey={"email"} scroll={{ y: 400 }}/>
                 </div>
-                <Paginationcom className="page" onChange={changePagination}/>
+                <Paginationcom className={styles.page} onChange={changePagination}/>
             </div>
                 
             

@@ -8,7 +8,7 @@ import {
   import Saledetail from '../../components/salemonitor/Saledetail';
   import Paginationcom from '../../components/Paginationcom';
 import getsale from '../../utils/api/salemonitor';
-import '../../style/views/datamonitor.scss';
+import styles from  '../../style/views/datamonitor.module.scss';
 
 interface DataType {
   key: string;
@@ -128,11 +128,11 @@ const Salemonitor: React.FC = () => {
     return (
         
 
-        <div className="fathercontainer">
+        <div className={styles.fathercontainer}>
         <div>
           <Button type="primary" onClick={clickBtn}>新增</Button>
         </div>
-        <div className="datamonitor">
+        <div className={styles.datamonitor}>
         <Table columns={columns} dataSource={data} pagination={false} bordered={true}
         rowKey={"text"} scroll={{ y: 600 }}/>
           {/*  */}
@@ -140,7 +140,7 @@ const Salemonitor: React.FC = () => {
           {/*  */}
           <Saledetail ref={childRefDetail}/>
         </div>
-        <div className="page">
+        <div className={styles.page}>
           <Paginationcom onChange={changePagination}/>
         </div>
       </div>

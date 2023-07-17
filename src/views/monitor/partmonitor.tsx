@@ -4,7 +4,7 @@ import type { TableColumnsType } from 'antd';
 import { Badge, Dropdown, Space, Table, Tag, Button, message, Popconfirm } from 'antd';
 import getpart from '../../utils/api/partmonitor';
 import Paginationcom from '../../components/Paginationcom';
-import '../../style/views/datamonitor.scss';
+import styles from  '../../style/views/datamonitor.module.scss';
 import Addpart from '../../components/partmonitor/partmonitor';
 import Addpartchild from '../../components/partmonitor/addpartchild';
 
@@ -206,11 +206,11 @@ const Partmonitor: React.FC = () => {
     };
     
     return (
-      <div className="fathercontainer">
+      <div className={styles.fathercontainer}>
         <div>
           <Button type="primary" onClick={clickBtn}>新增</Button>
         </div>
-        <div className="datamonitor">
+        <div className={styles.datamonitor}>
             <Table
                 bordered={true}
                 pagination={false}
@@ -226,7 +226,7 @@ const Partmonitor: React.FC = () => {
             <Addpartchild ref={childExpandRef} />
         </div>
         
-        <div className="page">
+        <div className={styles.page}>
           <Paginationcom onChange={changePagination}/>
         </div>
       </div>

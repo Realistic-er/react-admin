@@ -7,7 +7,7 @@ import {
   } from "../../store/reducer/saveaccount";
 import { Button, Checkbox, Form, Input } from 'antd';
 import type { FormInstance } from 'antd/es/form';
-import '../../style/pages/LoginMoudle.scss';
+import styles from  '../../style/pages/LoginMoudle.module.scss';
 
 
 const onFinish = (values: any) => {
@@ -47,7 +47,7 @@ const onFinish = (values: any) => {
             });
     };
     return (
-        <div className="formcontainer">
+        <div className={styles.formcontainer}>
             <Form
                 form={form}
                 name="basic"
