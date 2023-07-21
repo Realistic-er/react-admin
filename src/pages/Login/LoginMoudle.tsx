@@ -1,12 +1,11 @@
-import React, { Component } from "react";
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from 'react-router-dom';
 import {
     selectAccount,
     updateAccount,
   } from "../../store/reducer/saveaccount";
-import { Button, Checkbox, Form, Input } from 'antd';
-import type { FormInstance } from 'antd/es/form';
+import { Button, Form, Input } from 'antd';
 import styles from  '../../style/pages/LoginMoudle.module.scss';
 
 

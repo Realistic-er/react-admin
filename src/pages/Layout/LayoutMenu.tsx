@@ -1,22 +1,23 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
-  BrowserRouter as Router, Route, Routes, useNavigate, Outlet, useLocation
+  BrowserRouter as Router, useNavigate, Outlet, useLocation
   } from 'react-router-dom';
   import { useSelector, useDispatch } from "react-redux";
 import {
-    selectCollapse,
-    updateCollapsed,
-  } from "../../store/reducer/operamenu";
-  import {
-    selectTagArray,
-    updateTagArray,
-  } from "../../store/reducer/tagopera";
+  selectCollapse,
+} from "../../store/reducer/operamenu";
+import {
+  updateTagArray,
+} from "../../store/reducer/tagopera";
+import {
+  selectAccount,
+} from "../../store/reducer/saveaccount";
 import {
   AppstoreOutlined,
   ContainerOutlined,
   DesktopOutlined,
   MailOutlined,
-  MenuFoldOutlined,
+  DiffOutlined,
   SlidersOutlined,
   PieChartOutlined,
   DatabaseOutlined
@@ -43,16 +44,21 @@ function getItem(
     type,
   } as MenuItem;
 }
-
-const items = [
-  {
+interface item {
+  key: string,
+  label: string,
+  auth?: string[],
+  icon: React.ReactNode,
+  children?: item[],
+}
+const items:item[] = [
+    {
       key: '/layout',
       label: '首页',
       auth: ['admin', 'visit'],
-      // children: [],
       icon: <AppstoreOutlined />,
-  },
-  {
+    },
+    {
       key: '/layout/monitor',
       label: '监控',
       icon: <ContainerOutlined />,
@@ -82,24 +88,45 @@ const items = [
           icon: <PieChartOutlined />,
         },
       ]
-  },
-  {
-    key: '/layout/charge',
-    label: '管理',
-    icon: <ContainerOutlined />,
-    children: [
-      {
-        key: '/layout/charge/sourcematerial',
-        label: '素材管理',
-        auth: ['admin', 'visit'],
-        icon: <DatabaseOutlined />,
-      },
-    ]
-},
+    },
+    {
+      key: '/layout/charge',
+      label: '管理',
+      icon: <ContainerOutlined />,
+      children: [
+        {
+          key: '/layout/charge/sourcematerial',
+          label: '素材管理',
+          auth: ['admin', 'visit'],
+          icon: <DatabaseOutlined />,
+        },
+        {
+          key: '/layout/charge/infocharge',
+          label: '信息管理',
+          auth: ['admin', 'visit'],
+          icon: <DiffOutlined />,
+        },
+      ]
+    },
 ];
 
 const LayoutMenu: React.FC = () => {
   const collapsed = useSelector(selectCollapse);
+  const account = window.localStorage.getItem('account');
+  const array:any = [];
+  items.forEach((v:item) => {
+    if (!v.children && account && v.auth?.indexOf(account) !== -1) {
+      array.push(v);
+    } else {
+      const obj:item = v;
+      if (obj.children) {
+        obj.children.map((i:any) => {
+          return i.auth?.indexOf(account) !== -1;
+        })
+        array.push(obj);
+      }
+    }
+  })
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const onJump = (e:any) => {
@@ -111,9 +138,6 @@ const LayoutMenu: React.FC = () => {
   return (
     <div className={styles.layout}>
       <div  className={styles.menu}>
-        {/* <Button type="primary" onClick={toggleCollapsed} style={{ marginBottom: 16 }}>
-          {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-        </Button> */}
         <Menu
           defaultSelectedKeys={[pathname]}
           style={{ width: collapsed ? '80px' : '256px' }}
@@ -122,7 +146,7 @@ const LayoutMenu: React.FC = () => {
           mode="inline"
           theme="dark"
           inlineCollapsed={collapsed}
-          items={items}
+          items={array}
           onClick={onJump}
         />
       </div>

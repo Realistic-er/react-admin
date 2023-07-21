@@ -1,41 +1,21 @@
-import React, { useEffect, useState, useRef } from 'react';
-import { Space, Table, Modal, Button, Form,
-  Checkbox, message, Switch, Input, Select, DatePicker  } from 'antd';
-import {
-    QuestionCircleOutlined,
-    ExclamationCircleFilled,
-    SearchOutlined,
-    } from '@ant-design/icons';
-    import styles from  '../../style/components/searchmaterial.module.scss';
+import React from 'react';
+import { Space,Button, Form, message, Input, Select, DatePicker  } from 'antd';
+import styles from  '../../style/components/searchmaterial.module.scss';
 const Searchmateral: React.FC = () => {
     const { RangePicker } = DatePicker;
-      const [data, setData] = useState([]);
-      const childRefSource = useRef();
-      const childRefSourceDetail = useRef();
-      const changePagination = (page:number, pageSize:number) =>{
-          message.success({
-            content: `当前页码为${page},页数量为${pageSize}`,
-          });
-      };
-      const clickBtn = () =>{
-          (childRefSource.current as any).showModal();
-        };
       const [form] = Form.useForm();
       const onReset = () => {
         form.resetFields();
       };
       const search = () => {
         const data = form.getFieldsValue();
-        message.info(JSON.stringify(data),);
+        message.info(JSON.stringify(data));
       };
       return (
                 <Form
                   name="basicsearchsource"
                   className={styles.formcon}
                   labelCol={{ span: 8 }}
-                  // wrapperCol={{ span: 16 }}
-                  // style={{ minWidth: 600 }}
-                  // initialValues={{ remember: true }}
                   autoComplete="off"
                   form={form}
                 >
@@ -54,7 +34,7 @@ const Searchmateral: React.FC = () => {
                   </Form.Item>
 
                   <Form.Item name="sourcestatus" label="状态">
-                    <Select style={{ width: 200 }}>
+                    <Select style={{ width: 100 }}>
                       <Select.Option value="1">正常</Select.Option>
                       <Select.Option value="2">禁用</Select.Option>
                     </Select>

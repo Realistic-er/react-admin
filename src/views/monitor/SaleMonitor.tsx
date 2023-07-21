@@ -1,12 +1,12 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { Space, Table, Tag, Button, Popconfirm, message, Badge  } from 'antd';
+import { Space, Table, Button, Popconfirm, message, Badge  } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import {
     QuestionCircleOutlined
   } from '@ant-design/icons';
-  import AddSale from '../../components/salemonitor/Addsale';
-  import Saledetail from '../../components/salemonitor/Saledetail';
-  import Paginationcom from '../../components/Paginationcom';
+import AddSale from '../../components/salemonitor/Addsale';
+import Saledetail from '../../components/salemonitor/Saledetail';
+import Paginationcom from '../../components/Paginationcom';
 import getsale from '../../utils/api/salemonitor';
 import styles from  '../../style/views/datamonitor.module.scss';
 
@@ -19,8 +19,6 @@ interface DataType {
   salestatus: string;
   text: string;
 }
-
-
 
 const Salemonitor: React.FC = () => {
     const [data, setData] = useState([]);
@@ -126,8 +124,6 @@ const Salemonitor: React.FC = () => {
         (childRefSale.current as any).showModal();
       };
     return (
-        
-
         <div className={styles.fathercontainer}>
         <div>
           <Button type="primary" onClick={clickBtn}>新增</Button>

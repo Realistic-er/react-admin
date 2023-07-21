@@ -1,11 +1,5 @@
-import React, { useState, forwardRef, useImperativeHandle, useEffect } from 'react';
-import { Upload, Modal, Tag, Table, Space, Button, Popconfirm, message } from 'antd';
-// import Videosource from './videosource';
-import { QuestionCircleOutlined } from '@ant-design/icons';
-import type { UploadFile } from 'antd/es/upload/interface';
-import type { RcFile, UploadProps } from 'antd/es/upload';
-import type { ColumnsType } from 'antd/es/table';
-import Paginationcom from '../../components/Paginationcom';
+import React, { useState, forwardRef, useImperativeHandle, } from 'react';
+import { Modal,} from 'antd';
 import '../../style/components/saledetail.module.scss';
 
 interface DataType {
@@ -29,9 +23,6 @@ const Sourcedetail: React.FC<any> = forwardRef(
         };
       });
         const [isModalOpen, setIsModalOpen] = useState(false);
-        // useEffect(() => {
-        //   form.setFieldsValue({...recordobject})
-        // }, [recordobject])
         const showModal = () => {
           setIsModalOpen(true);
         };

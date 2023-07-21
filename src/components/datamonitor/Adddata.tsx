@@ -1,5 +1,5 @@
 import React, { useState, forwardRef, useImperativeHandle, useEffect } from 'react';
-import { Button, Modal, Form, Input, message, Radio } from 'antd';
+import { Modal, Form, Input, message, Radio } from 'antd';
 
 const Adddata: React.FC<any> = forwardRef(
     (props, ref) => {

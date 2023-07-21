@@ -4,8 +4,8 @@ import type { ColumnsType } from 'antd/es/table';
 import {
     QuestionCircleOutlined
   } from '@ant-design/icons';
-  import Addprocess from '../../components/processmonitor/addprocess';
-  import Paginationcom from '../../components/Paginationcom';
+import Addprocess from '../../components/processmonitor/addprocess';
+import Paginationcom from '../../components/Paginationcom';
 import getprocess from '../../utils/api/processmonitor';
 import styles from  '../../style/views/datamonitor.module.scss';
 

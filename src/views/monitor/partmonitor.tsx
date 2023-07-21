@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { DownOutlined, QuestionCircleOutlined } from '@ant-design/icons';
+import { QuestionCircleOutlined } from '@ant-design/icons';
 import type { TableColumnsType } from 'antd';
-import { Badge, Dropdown, Space, Table, Tag, Button, message, Popconfirm } from 'antd';
+import { Table, Tag, Button, message, Popconfirm } from 'antd';
 import getpart from '../../utils/api/partmonitor';
 import Paginationcom from '../../components/Paginationcom';
 import styles from  '../../style/views/datamonitor.module.scss';
@@ -24,61 +24,55 @@ interface ExpandedDataType {
     status: string;
     text: string;
 }
-const items = [
-    { key: '1', label: 'Action 1' },
-    { key: '2', label: 'Action 2' },
-];
 const Partmonitor: React.FC = () => {
     const childRefPart = useRef();
     const childExpandRef = useRef();
-    
     const expandedRowRender = (record:DataType) => {
-      // 
       const editExpand = (record:DataType) => {
         (childExpandRef.current as any).showModalExpanEdit(record);
       };
-      
-        const columns: TableColumnsType<ExpandedDataType> = [
-          {
-            title: '序号',
-            render:(text,record,index)=>`${index+1}`,
-          },
-          { title: '申请人', dataIndex: 'partname', key: 'partname' },
-          { title: '部门', dataIndex: 'part', key: 'part' },
-          { title: '状态', dataIndex: 'status', key: 'status', render: (_, { status }) => {
-            let color = '';
-            let text = '';
-            if (status === '1') {
-                color = 'grey'
-                text = '未处理'
-            } else if (status === '2') {
-                color = 'green'
-                text = '通过'
-            } else {
-                color = 'red'
-                text = '打回'
-            }
-            return <Tag color={color}>{text}</Tag>
-            }},
-            { title: '备注', dataIndex: 'text', key: 'text' },
-          {
-            title: '操作',
-            dataIndex: 'operation',
-            key: 'operation',
-            render: () => (
-              <Button type="link" block onClick={() => editExpand(record)}>
-                编辑
-              </Button>
-            ),
-          },
-        ];
+      const columns: TableColumnsType<ExpandedDataType> = [
+        {
+          title: '序号',
+          render:(text,record,index)=>`${index+1}`,
+        },
+        { title: '申请人', dataIndex: 'partname', key: 'partname' },
+        { title: '部门', dataIndex: 'part', key: 'part' },
+        { title: '状态', dataIndex: 'status', key: 'status', render: (_, { status }) => {
+          let color = '';
+          let text = '';
+          if (status === '1') {
+              color = 'grey'
+              text = '未处理'
+          } else if (status === '2') {
+              color = 'green'
+              text = '通过'
+          } else {
+              color = 'red'
+              text = '打回'
+          }
+          return <Tag color={color}>{text}</Tag>
+          }},
+          { title: '备注', dataIndex: 'text', key: 'text' },
+        {
+          title: '操作',
+          dataIndex: 'operation',
+          key: 'operation',
+          render: () => (
+            <Button type="link" block onClick={() => editExpand(record)}>
+              编辑
+            </Button>
+          ),
+        },
+      ];
 
         return <Table
-        rowKey={"partname"}
-        bordered={true}
-        columns={columns}
-        dataSource={record.childlist}
-        pagination={false} />;
+          rowKey={"partname"}
+          bordered={true}
+          columns={columns}
+          dataSource={record.childlist}
+          pagination={false}
+        />;
     };
     
     

@@ -1,20 +1,17 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { Space, Table, Modal, Button, Col, Row,
-  Popconfirm, message, Switch, Input, Select, DatePicker  } from 'antd';
+import { Space, Table, Modal, Button,
+  Popconfirm, message, Switch,  } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
-import type { DatePickerProps } from 'antd';
 import {
     QuestionCircleOutlined,
     ExclamationCircleFilled,
-    SearchOutlined,
   } from '@ant-design/icons';
-  import AddSource from '../../components/sourcematerial/AddSource';
-  import Sourcedetail from '../../components/sourcematerial/SourceDetail';
-  import Searchmateral from '../../components/sourcematerial/Searchmateral';
-  import Paginationcom from '../../components/Paginationcom';
+import AddSource from '../../components/sourcematerial/AddSource';
+import Sourcedetail from '../../components/sourcematerial/SourceDetail';
+import Searchmateral from '../../components/sourcematerial/Searchmateral';
+import Paginationcom from '../../components/Paginationcom';
 import getsource from '../../utils/api/sourcematerial';
 import styles from  '../../style/views/sourcematerial.module.scss';
-import Search from 'antd/es/transfer/search';
 
 interface DataType {
   key: string;
@@ -43,23 +40,21 @@ const onChange = (sourcestatus:string) => {
         title,
         icon: <ExclamationCircleFilled />,
         onOk() {
-            message.success({
-                content,
-            });
+          message.success({
+            content,
+          });
         },
         onCancel() {
-            message.warning({
-                content: '取消操作',
-            });
+          message.warning({
+            content: '取消操作',
+          });
         },
         });
 };
 const Sourcematerial: React.FC = () => {
-  const { RangePicker } = DatePicker;
     const [data, setData] = useState([]);
     const childRefSource = useRef();
     const childRefSourceDetail = useRef();
-    
     const columns: ColumnsType<DataType> = [
         {
             title: '序号',
@@ -80,11 +75,11 @@ const Sourcematerial: React.FC = () => {
         },
         { title: '素材图片', dataIndex: 'sourceimage', key: 'sourceimage', render: (_, { sourceimage }) => (
             <>
-                {sourceimage.map((Sourceimage:string, index:number) => {
-                return (
-                    <img style={{width: '50px', marginRight: '10px'}} src={Sourceimage} key={index} />
-                );
-                })}
+              {sourceimage.map((Sourceimage:string, index:number) => {
+              return (
+                <img style={{width: '50px', marginRight: '10px'}} src={Sourceimage} key={index} />
+              );
+              })}
             </>
        ), width: 100, },
         {
@@ -117,8 +112,6 @@ const Sourcematerial: React.FC = () => {
               key: 'x',
               render: (_, record) => (
                 <Space size="middle">
-                    {/* <a>Invite {record.name}</a>
-                    <a>Delete</a> */}
                     <Button type="link" onClick={() => edit(record)}>编辑</Button>
                     <Popconfirm
                         title="删除"
@@ -133,7 +126,7 @@ const Sourcematerial: React.FC = () => {
                 </Space>
               ),
             },
-      ];
+    ];
     const confirm = () =>{
         message.success({
           content: '删除成功',
@@ -148,8 +141,8 @@ const Sourcematerial: React.FC = () => {
       (childRefSource.current as any).showModalEdit(record);
     };
     const detail = (record:DataType) => {
-        (childRefSourceDetail.current as any).showModal();
-      };
+      (childRefSourceDetail.current as any).showModal();
+    };
     useEffect(() => {
         getsource().then((Response) => {
           setData(Response.data.data.data)
@@ -161,30 +154,9 @@ const Sourcematerial: React.FC = () => {
         });
     };
     const clickBtn = () =>{
-        (childRefSource.current as any).showModal();
-      };
-    const [sourcename, setSourcename] = useState('');
-    const [sourcetheme, setSourcetheme] = useState('');
-    const [sourcestatus, setSourcestatus] = useState('');
-    const [sourcedate, setSourcedate] = useState('');
-    const handleSelectTime = (date:any, dateString:any) => {
-      console.log(date, dateString);
-      setSourcedate(sourcedate);
-    };
-    const search = () => {
-      message.success({
-        content: `${sourcename} + ${sourcetheme} + ${sourcestatus}+ ${sourcedate}`,
-      });
-    };
-    const clear = () => {
-      setSourcename('');
-      setSourcetheme('');
-      setSourcestatus('');
-      setSourcedate('');
+      (childRefSource.current as any).showModal();
     };
     return (
-        
-
         <div className={styles.fathercontainer}>
           {/*  */}
           <Searchmateral />

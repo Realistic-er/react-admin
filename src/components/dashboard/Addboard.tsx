@@ -1,5 +1,5 @@
 import React, { useState, forwardRef, useImperativeHandle, useEffect } from 'react';
-import { Button, Modal, Form, Input, message } from 'antd';
+import { Modal, Form, Input, message } from 'antd';
 
 const Addboard: React.FC<any> = forwardRef(
     (props, ref) => {
@@ -19,12 +19,10 @@ const Addboard: React.FC<any> = forwardRef(
           setIsModalOpen(true);
           form.resetFields();
         };
-
         const showModalEdit = (record:any) => {
           setIsModalOpen(true);
           setIsRecord(record);
         };
-      
         const handleOk = () => {
           form.validateFields()
             .then((values) => {
@@ -40,19 +38,15 @@ const Addboard: React.FC<any> = forwardRef(
               })
             });
         };
-      
         const handleCancel = () => {
           setIsModalOpen(false);
         };
-    
         const onFinish = (values: any) => {
           console.log('Success:', values);
         };
-        
         const onFinishFailed = (errorInfo: any) => {
           console.log('Failed:', errorInfo);
         };
-      
         return (
           <Modal title="创建" open={isModalOpen} okText="提交" cancelText="取消" destroyOnClose={true}
             onOk={handleOk} onCancel={handleCancel} forceRender>

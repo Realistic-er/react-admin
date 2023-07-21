@@ -15,6 +15,7 @@ const Partmonitor = lazy(() => import('../../views/monitor/partmonitor'));
 const Processmonitor = lazy(() => import('../../views/monitor/ProcessMonitor'));
 const Salemonitor = lazy(() => import('../../views/monitor/SaleMonitor'));
 const sourcematerial = lazy(() => import('../../views/charge/SourceMaterial'));
+const Infocharge = lazy(() => import('../../views/charge/InfoCharge'));
 
 
 const routeconfig = [
@@ -54,6 +55,12 @@ const routeconfig = [
         label: '素材管理',
         auth: ['admin', 'visit'],
         component: sourcematerial,
+    },
+    {
+        key: 'charge/infocharge',
+        label: '信息管理',
+        auth: ['admin', 'visit'],
+        component: Infocharge,
     },
 ];
 export default routeconfig;

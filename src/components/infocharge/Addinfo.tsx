@@ -1,6 +1,8 @@
 import React, { useState, forwardRef, useImperativeHandle, useEffect } from 'react';
-import { Upload, Modal, Form, Input, message, InputNumber, Select } from 'antd';
+import { Upload, Modal, Form, Input, message, DatePicker } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
+import dayjs from 'dayjs';
+import customParseFormat from 'dayjs/plugin/customParseFormat';
 import type { UploadFile } from 'antd/es/upload/interface';
 import type { UploadProps } from 'antd/es/upload';
 
@@ -9,7 +11,8 @@ interface arraytype {
     name: string,
     url: string,
 }
-const Addprocess: React.FC<any> = forwardRef(
+dayjs.extend(customParseFormat);
+const AddSource: React.FC<any> = forwardRef(
     (props, ref) => {
       useImperativeHandle(ref, () => {
         return {
@@ -29,12 +32,11 @@ const Addprocess: React.FC<any> = forwardRef(
           form.resetFields();
           setFileList([]);
         };
-
         const showModalEdit = (record:any) => {
-          setIsModalOpen(true);
-          setIsRecord(record);
+          const obj = record;
+          obj.date = dayjs(new Date(record.date));
           const array:arraytype[] = [];
-          record.processimage.forEach((v:string) => {
+          record.infoimage.forEach((v:string) => {
             const obj = {
               uid: '',
               name: '',
@@ -44,8 +46,9 @@ const Addprocess: React.FC<any> = forwardRef(
             array.push(obj)
           })
           setFileList(array);
+          setIsRecord(obj);
+          setIsModalOpen(true);
         };
-      
         const handleOk = () => {
           form.validateFields()
             .then((values) => {
@@ -73,17 +76,6 @@ const Addprocess: React.FC<any> = forwardRef(
         const onFinishFailed = (errorInfo: any) => {
           console.log('Failed:', errorInfo);
         };
-        const options = [
-            { value: '1', label: 'Jack' },
-            { value: '2', label: 'Lucy' },
-            { value: '3', label: 'yiminghe' },
-        ];
-        const optionsMulti = [
-            { value: '1', label: '监督' },
-            { value: '2', label: '审核' },
-            { value: '3', label: '执行' },
-        ];
-
         const uploadButton = (
             <div>
               <PlusOutlined />
@@ -116,70 +108,76 @@ const Addprocess: React.FC<any> = forwardRef(
               autoComplete="off"
               preserve={false}
             >
-              <Form.Item
-              label="负责人"
-              name="processname"
-              rules={[{ required: true, message: '负责人不能为空!' }]}
+
+            <Form.Item
+              label="信息名称"
+              name="info"
+              rules={[{ required: true, message: '信息名称不能为空!' }]}
               >
-                <Select
-                    allowClear
-                    placeholder="请选择负责人"
-                    options={options}
-                />
-              </Form.Item>
-      
-              <Form.Item
-              label="责任"
-              name="process"
-              rules={[{ required: true, message: '责任不能为空!' }]}
-              >
-                <Select
-                    mode="multiple"
-                    allowClear
-                    style={{ width: '100%' }}
-                    placeholder="请选择责任"
-                    options={optionsMulti}
-                />
+                <Input placeholder="请输入信息名称"/>
               </Form.Item>
 
-              <Form.Item
-              label="进度"
-              name="statusprocess"
-              rules={[{ required: true, message: '状态不能为空!' }]}
-              >
-                <InputNumber min={0} max={100}/>
-              </Form.Item>
-
-              <Form.Item
-              label="email"
-              name="email"
-              rules={[{ required: true, message: 'email不能为空!' }]}
-              >
-                <Input placeholder="请输入你的email"/>
-              </Form.Item>
-
-              <Form.Item label="现场图片" name="processimage"
+              <Form.Item label="示例图片" name="infoimage"
               getValueFromEvent={normFile}
-              rules={[{ required: true, message: '现场图片不能为空!' }]}>
+              rules={[{ required: true, message: '示例图片不能为空!' }]}>
                 <Upload
                 listType="picture-card"
                 fileList={fileList}
                 onChange={handleChange}>
-                    {fileList.length >= 3 ? null : uploadButton}
+                    {fileList.length >= 1 ? null : uploadButton}
                 </Upload>
             </Form.Item>
 
+            <Form.Item
+            label="url"
+            name="url"
+            rules={[{ required: true, message: 'url不能为空!' }]}
+            >
+            <Input placeholder="请输入url"/>
+            </Form.Item>
+            
+            <Form.Item
+            label="ip"
+            name="ip"
+            rules={[{ required: true, message: 'ip不能为空!' }]}
+            >
+            <Input placeholder="请输入ip"/>
+            </Form.Item>
 
-              <Form.Item
+            <Form.Item
+            label="地址"
+            name="address"
+            rules={[{ required: true, message: '地址不能为空!' }]}
+            >
+                <Input placeholder="请输入地址"/>
+            </Form.Item>
+
+            <Form.Item
+              label="日期"
+              name="date"
+              rules={[{ required: true, message: '日期不能为空!' }]}
+              >
+                <DatePicker />
+                {/* <ConfigProvider locale={locale}>
+                  <DatePicker defaultValue={dayjs('2015-01-01', 'YYYY-MM-DD')} />
+                </ConfigProvider> */}
+            </Form.Item>
+
+            <Form.Item
+              label="email"
+              name="email"
+              rules={[{ required: true, message: 'email不能为空!' }]}
+              >
+                <Input placeholder="请输入email"/>
+            </Form.Item>
+
+            <Form.Item
               label="备注"
               name="text"
               rules={[{ required: true, message: '备注不能为空!' }]}
               >
                 <Input placeholder="请输入备注"/>
               </Form.Item>
-
-
-              
           </Form>
           </Modal>
         );
@@ -187,6 +185,6 @@ const Addprocess: React.FC<any> = forwardRef(
     
 );
 
-Addprocess.displayName = 'Addprocess';
+AddSource.displayName = 'AddSource';
 
-export default Addprocess;
+export default AddSource;

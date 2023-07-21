@@ -1,19 +1,19 @@
-import React, { Component, useRef } from "react";
+import React, { useRef } from "react";
 import { Table, Button, Space, message, Popconfirm } from 'antd';
 import {
-    QuestionCircleOutlined
-  } from '@ant-design/icons';
+  QuestionCircleOutlined
+} from '@ant-design/icons';
 import type { ColumnsType } from 'antd/es/table';
 import Addboard from '../../components/dashboard/Addboard';
 import styles from  '../../style/views/dashboard.module.scss';
 
 interface DataType {
-    key: React.Key;
-    name: string;
-    age: number;
-    address: string;
-    description: string;
-  }
+  key: React.Key;
+  name: string;
+  age: number;
+  address: string;
+  description: string;
+}
   
   
 const DashBoard: React.FC = () => {
@@ -22,33 +22,38 @@ const DashBoard: React.FC = () => {
       (childRef.current as any).showModalEdit(record);
     };
     const columns: ColumnsType<DataType> = [
-        { title: '姓名', dataIndex: 'name', key: 'name' },
-        { title: '年龄', dataIndex: 'age', key: 'age' },
-        { title: '地址', dataIndex: 'address', key: 'address' },
-        { title: '描述', dataIndex: 'description', key: 'description' },
-        {
-          title: '操作',
-          dataIndex: '',
-          key: 'x',
-          render: (_, record) => (
-            <Space size="middle">
-                {/* <a>Invite {record.name}</a>
-                <a>Delete</a> */}
-                <Button type="link" onClick={() => edit(record)}>编辑</Button>
-                <Popconfirm
-                    title="删除"
-                    description={'确认要删除'+ `${record.name}`+'?'}
-                    onConfirm={confirm}
-                    onCancel={cancel}
-                    icon={<QuestionCircleOutlined style={{ color: 'red' }} />}
-                > 
-                    <Button type="link">删除</Button>
-                </Popconfirm>
-                
-            </Space>
-          ),
-        },
-      ];
+      {
+        title: '序号',
+        width: 80,
+        render:(text,record,index)=>`${index+1}`,
+      },
+      { title: '姓名', dataIndex: 'name', key: 'name' },
+      { title: '年龄', dataIndex: 'age', key: 'age' },
+      { title: '地址', dataIndex: 'address', key: 'address' },
+      { title: '描述', dataIndex: 'description', key: 'description' },
+      {
+        title: '操作',
+        dataIndex: '',
+        key: 'x',
+        render: (_, record) => (
+          <Space size="middle">
+              {/* <a>Invite {record.name}</a>
+              <a>Delete</a> */}
+              <Button type="link" onClick={() => edit(record)}>编辑</Button>
+              <Popconfirm
+                  title="删除"
+                  description={'确认要删除'+ `${record.name}`+'?'}
+                  onConfirm={confirm}
+                  onCancel={cancel}
+                  icon={<QuestionCircleOutlined style={{ color: 'red' }} />}
+              > 
+                  <Button type="link">删除</Button>
+              </Popconfirm>
+              
+          </Space>
+        ),
+      },
+    ];
       
     const data: DataType[] = [
       {

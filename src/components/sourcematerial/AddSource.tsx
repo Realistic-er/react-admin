@@ -1,8 +1,8 @@
 import React, { useState, forwardRef, useImperativeHandle, useEffect } from 'react';
-import { Upload, Modal, Form, Input, message, InputNumber, Select } from 'antd';
+import { Upload, Modal, Form, Input, message, InputNumber } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 import type { UploadFile } from 'antd/es/upload/interface';
-import type { RcFile, UploadProps } from 'antd/es/upload';
+import type { UploadProps } from 'antd/es/upload';
 
 interface arraytype {
     uid: string,
@@ -29,11 +29,9 @@ const AddSource: React.FC<any> = forwardRef(
           form.resetFields();
           setFileList([]);
         };
-
         const showModalEdit = (record:any) => {
           setIsModalOpen(true);
           setIsRecord(record);
-          
           const array:arraytype[] = [];
           record.sourceimage.forEach((v:string) => {
             const obj = {
@@ -74,17 +72,12 @@ const AddSource: React.FC<any> = forwardRef(
         const onFinishFailed = (errorInfo: any) => {
           console.log('Failed:', errorInfo);
         };
-        const options = [
-            { value: '1', label: 'Jack' },
-            { value: '2', label: 'Lucy' },
-            { value: '3', label: 'yiminghe' },
-        ];
 
         const uploadButton = (
-            <div>
-              <PlusOutlined />
-              <div style={{ marginTop: 8 }}>Upload</div>
-            </div>
+          <div>
+            <PlusOutlined />
+            <div style={{ marginTop: 8 }}>Upload</div>
+          </div>
         );
 
         const normFile = (e: any) => {

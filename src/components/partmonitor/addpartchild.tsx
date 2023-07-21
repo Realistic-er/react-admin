@@ -1,8 +1,5 @@
 import React, { useState, forwardRef, useImperativeHandle, useEffect } from 'react';
-import { Button, Modal, Form, Input, message, Radio, Upload } from 'antd';
-import { PlusOutlined } from '@ant-design/icons';
-import type { UploadFile } from 'antd/es/upload/interface';
-import type { RcFile, UploadProps } from 'antd/es/upload';
+import { Modal, Form, Input, message } from 'antd';
 
 const Addpartchild: React.FC<any> = forwardRef(
     (props, ref) => {

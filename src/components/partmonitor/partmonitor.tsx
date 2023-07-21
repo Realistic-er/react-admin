@@ -1,8 +1,8 @@
 import React, { useState, forwardRef, useImperativeHandle, useEffect } from 'react';
-import { Button, Modal, Form, Input, message, Radio, Upload } from 'antd';
+import { Modal, Form, Input, message,Upload } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 import type { UploadFile } from 'antd/es/upload/interface';
-import type { RcFile, UploadProps } from 'antd/es/upload';
+import type { UploadProps } from 'antd/es/upload';
 
 interface arraytype {
   uid: string,

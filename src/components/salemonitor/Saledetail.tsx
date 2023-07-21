@@ -1,8 +1,5 @@
-import React, { useState, forwardRef, useImperativeHandle, useEffect } from 'react';
-import { Upload, Modal, Tag, Table, Space, Button, Popconfirm, message } from 'antd';
-import { QuestionCircleOutlined } from '@ant-design/icons';
-import type { UploadFile } from 'antd/es/upload/interface';
-import type { RcFile, UploadProps } from 'antd/es/upload';
+import React, { useState, forwardRef, useImperativeHandle } from 'react';
+import { Modal, Tag, Table, message } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import Paginationcom from '../../components/Paginationcom';
 import styles from '../../style/components/saledetail.module.scss';

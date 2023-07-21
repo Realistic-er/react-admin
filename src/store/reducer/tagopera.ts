@@ -21,6 +21,10 @@ const routearray  = [
         key: '/layout/charge/sourcematerial',
         label: '素材管理',
     },
+    {
+        key: '/layout/charge/infocharge',
+        label: '信息管理',
+    },
 ];
 const initialState = {
     tagarray: [
@@ -44,8 +48,7 @@ export const tagsSlice = createSlice({
             const tag = routearray.find((ele) => {
                 return ele.key === actions.payload;
             });
-            if (tag !== undefined) state.tagarray.push(tag)
-            
+            if (tag !== undefined) state.tagarray.push(tag);
         }
     },
     // 删除标签
@@ -54,7 +57,6 @@ export const tagsSlice = createSlice({
         const index = state.tagarray.findIndex(item => {
             return item.key === actions.payload.key;
         })
-        console.log(index);
         state.tagarray.splice(index, 1);
     },
   },
