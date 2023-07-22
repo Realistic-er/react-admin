@@ -7,6 +7,8 @@ import Private from '../components/Authroute';
 import SpinLoading from '../components/Spin';
 const LoginMoudle = lazy(() => import('../pages/Login/LoginMoudle'));
 const LayoutMenu = lazy(() => import('../pages/Layout/LayoutMenu'));
+const Notfound = lazy(() => import('../pages/Error/Notfound'));
+const Notpermission = lazy(() => import('../pages/Error/Notpermission'));
 
 const routes:React.FC<any> = () => {
     return (
@@ -14,7 +16,7 @@ const routes:React.FC<any> = () => {
             <Suspense fallback={<SpinLoading />}>
                 <Routes>
                     <Route path=''  Component={LoginMoudle}></Route>
-                    <Route path='/layout/*' Component={LayoutMenu}>
+                    <Route path='/layout' Component={LayoutMenu}>
                         {
                            routeconfig.map((v) => {
                                 return <Route
@@ -23,6 +25,9 @@ const routes:React.FC<any> = () => {
                            })
                         }
                     </Route>
+                    {/*  */}
+                    <Route path='/401'  Component={Notpermission}></Route>
+                    <Route path='*'  Component={Notfound}></Route>
                 </Routes>
             </Suspense>
         </Router>
