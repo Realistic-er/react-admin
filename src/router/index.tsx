@@ -19,9 +19,22 @@ const routes:React.FC<any> = () => {
                     <Route path='/layout' Component={LayoutMenu}>
                         {
                            routeconfig.map((v) => {
-                                return <Route
-                                element={<Private Component={v.component} />}
-                                path={v.key} key={v.key}/>
+                                if (v.children) {
+                                    return <Route element={<Private Component={v.component} />}
+                                    path={v.key} key={v.key}>
+                                        {
+                                            v.children.map((i) => {
+                                                return <Route
+                                                Component={i.component}
+                                                path={i.key} key={i.key}/>
+                                            })
+                                        }
+                                    </Route>
+                                } else {
+                                    return <Route
+                                    element={<Private Component={v.component} />}
+                                    path={v.key} key={v.key}/>
+                                }
                            })
                         }
                     </Route>

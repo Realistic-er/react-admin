@@ -25,6 +25,10 @@ const routearray  = [
         key: '/layout/charge/infocharge',
         label: '信息管理',
     },
+    {
+        key: '/layout/components/animation',
+        label: '动画',
+    },
 ];
 const initialState = {
     tagarray: [

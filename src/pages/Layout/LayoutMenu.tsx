@@ -17,7 +17,9 @@ import {
   DiffOutlined,
   SlidersOutlined,
   PieChartOutlined,
-  DatabaseOutlined
+  DatabaseOutlined,
+  SlackOutlined,
+  LoadingOutlined,
 } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
 import { Menu } from 'antd';
@@ -105,6 +107,19 @@ const items:item[] = [
         },
       ]
     },
+    {
+      key: '/layout/components',
+      label: '组件',
+      icon: <SlackOutlined />,
+      children: [
+        {
+          key: '/layout/components/animation',
+          label: '动画',
+          auth: ['admin', 'visit'],
+          icon: <LoadingOutlined />,
+        },
+      ]
+    },
 ];
 
 const LayoutMenu: React.FC = () => {
@@ -153,6 +168,7 @@ const LayoutMenu: React.FC = () => {
         <LayoutHeader />
         {/* 路由出口 */}
         <Outlet />
+        
       </div>
     </div>
     
