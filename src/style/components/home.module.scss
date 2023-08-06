@@ -4,4 +4,55 @@
     background-repeat: no-repeat;
     width: 100%;
     background-size: cover;
+    animation: mymove 10s linear;
+    animation-iteration-count: infinite;
+    @keyframes mymove {
+        50% {
+            background-image: url('https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png');
+        }
+        100% {
+            background-image: url('https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg');
+        }
+    }
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .left {
+        .div1 {
+            font-family: ui-monospace;
+            font-size: xxx-large;
+            color: white;
+        }
+        .div2 {
+            font-family: fangsong;
+            font-size: x-large;
+            color: antiquewhite;
+            padding-top: 30px;
+        }
+        .div3 {
+            display: flex;
+            /* justify-content: center; */
+            align-items: center;
+            padding-top: 30px;
+            button {
+                background-color: rgb(75, 7, 235);
+                color: antiquewhite;
+                margin-right: 30px;
+            }
+            button:hover {
+                animation: hover 2s linear;
+                animation-iteration-count: infinite;
+                @keyframes hover {
+                    100% {
+                        background-color: chocolate;
+                        color: white;
+                    }
+                }
+            }
+            span:nth-child(2) {
+                font-size: 30px;
+                color: red;
+            }
+        }
+    }
 }

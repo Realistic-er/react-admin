@@ -1,0 +1,45 @@
+.animatewave {
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    top: 100px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    background: #fcc;
+    position: absolute;
+    border-radius: 50%;
+    animation: opac 6s infinite;
+    @keyframes opac {
+        from {
+          opacity: 1;
+          width: 0;
+          height: 0;
+          top: 50%;
+          left: 50%;
+        }
+    
+        to {
+          opacity: 0;
+          width: 100%;
+          height: 100%;
+          top: 0;
+          left: 0;
+        }
+      }
+    .w2 {
+        animation-delay: 1s;
+    }
+    .w3 {
+        animation-delay: 2s;
+    }
+    .w4 {
+        animation-delay: 3s;
+    }
+    .w5 {
+        animation-delay: 4s;
+    }
+    .w6 {
+        animation-delay: 5s;
+    }
+  }
