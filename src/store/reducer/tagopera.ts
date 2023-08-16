@@ -29,6 +29,10 @@ const routearray  = [
         key: '/layout/components/animation',
         label: '动画',
     },
+    {
+        key: '/layout/components/charts',
+        label: '图表',
+    },
 ];
 const initialState = {
     tagarray: [

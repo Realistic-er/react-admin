@@ -19,6 +19,7 @@ const Infocharge = lazy(() => import('../../views/charge/InfoCharge'));
 const Animation = lazy(() => import('../../views/components/Animation'));
 const Home = lazy(() => import('../../components/Animation/Home'));
 const About = lazy(() => import('../../components/Animation/About'));
+const Charts = lazy(() => import('../../views/components/Charts'));
 
 
 const routeconfig = [
@@ -83,6 +84,12 @@ const routeconfig = [
                 component: About,
             }
         ],
+    },
+    {
+        key: 'components/charts',
+        label: '图表',
+        auth: ['admin', 'visit'],
+        component: Charts,
     },
 ];
 export default routeconfig;

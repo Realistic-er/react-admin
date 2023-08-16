@@ -20,6 +20,7 @@ import {
   DatabaseOutlined,
   SlackOutlined,
   LoadingOutlined,
+  AreaChartOutlined,
 } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
 import { Menu } from 'antd';
@@ -117,6 +118,12 @@ const items:item[] = [
           label: '动画',
           auth: ['admin', 'visit'],
           icon: <LoadingOutlined />,
+        },
+        {
+          key: '/layout/components/charts',
+          label: '图表',
+          auth: ['admin', 'visit'],
+          icon: <AreaChartOutlined />,
         },
       ]
     },
