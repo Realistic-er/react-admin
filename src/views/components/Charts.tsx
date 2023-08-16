@@ -1,12 +1,17 @@
 import React, { useEffect, useState, useRef } from 'react';
+import Charts1 from '../../components/components/Charts1';
+import Charts2 from '../../components/components/Charts2';
+import Charts3 from '../../components/components/Charts3';
+import DivShow from '../../components/components/DivShow';
 import * as echarts from 'echarts';
 // import Icon, { AppstoreOutlined } from '@ant-design/icons';
-import * as Icons from '@ant-design/icons';
+import * as Icon from '@ant-design/icons';
 import styles from '../../style/views/charts.module.scss';
 import { array, arraytype } from '../../utils/map/datashow';
 
 const Charts: React.FC = () => {
     const ref = useRef(null);
+    const Icons: React.FC<any> = Icon as any;
     const china = require("../../utils/map/china.json");
     useEffect(() => {
         // 基于准备好的dom，初始化echarts实例
@@ -286,13 +291,11 @@ const Charts: React.FC = () => {
                   symbolSize: 12
               },
               lineStyle: {
-                  normal: {
-                      color: color[i],
-                      //飞行路线宽度
-                      width: 1,
-                      opacity: 0.6,
-                      curveness: 0.2
-                  }
+                    color: color[i],
+                    //飞行路线宽度
+                    width: 1,
+                    opacity: 0.6,
+                    curveness: 0.2
               },
               data: convertData(item[1])
           }, {
@@ -308,19 +311,15 @@ const Charts: React.FC = () => {
                   brushType: 'stroke'
               },
               label: {
-                  normal: {
-                      show: true,
-                      position: 'right',
-                      formatter: '{b}'
-                  }
+                    show: true,
+                    position: 'right',
+                    formatter: '{b}'
               },
               symbolSize: function(val:any) {
                   return val[2] / 8;
               },
               itemStyle: {
-                  normal: {
-                      color: color[i],
-                  },
+                    color: color[i],
                   emphasis: {
                       areaColor: '#2B91B7'
                   }
@@ -356,8 +355,8 @@ const Charts: React.FC = () => {
           geo: {
             map: 'china',
             roam: false, //不开启缩放和平移
-            zoom: 1.0, //视角缩放比例
-            center: [105, 30],
+            zoom: 0.8, //视角缩放比例
+            center: [105, 46],
             label: {
               // normal: {
               //   show: true,
@@ -366,10 +365,8 @@ const Charts: React.FC = () => {
               // },
             },
             itemStyle: {
-              normal: {
                 areaColor: 'grey',
                 borderColor: 'rgba(0, 0, 0, 0.2)',
-              },
               emphasis: {
                 areaColor: '#4BD6C7', //鼠标选择区域颜色
                 shadowOffsetX: 0,
@@ -388,9 +385,9 @@ const Charts: React.FC = () => {
     //     return React.createElement(Icon[iconName])
     // };
     
-    const Icon = function (icon:string) {
-        return React.createElement(Icons[icon]);
-    };
+    // const Icon = function (icon) {
+    //     return React.createElement(Icons[icon]);
+    // };
 
     return (
       <div className={styles.container}>
@@ -408,8 +405,9 @@ const Charts: React.FC = () => {
                     // <Icon.IdcardOutlined />
                     array.map((item:any,index) => {
                         return <li key={index}>
-                            <Icon type={item.icon} />
+                            {/* <Icons component={item.icon as React.ForwardRefExoticComponent<any>} /> */}
                             {/*  */}
+                            <img src={item.icon} alt="" />
                             <div>
                                 <p>{item.label}</p>
                                 <p>{item.data}</p>
@@ -419,10 +417,29 @@ const Charts: React.FC = () => {
                 }
             </ul>
             {/*  */}
+            <div className={styles.charts1}>
+                <Charts1 />
+            </div>
             {/*  */}
+            <div className={styles.charts2}>
+                <Charts2 />
+            </div>
           </div>
-          <div className={styles.div2}></div>
-          <div className={styles.div3}></div>
+          <div className={styles.div2}>
+                <DivShow />
+          </div>
+          {/*  */}
+          <div className={styles.div3}>
+            <div className={styles.charts2}>
+                <Charts2 />
+            </div>
+            <div className={styles.charts2}>
+                <Charts2 />
+            </div>
+            <div className={styles.charts2}>
+                <Charts2 />
+            </div>
+          </div>
         </div>
       </div>
         
