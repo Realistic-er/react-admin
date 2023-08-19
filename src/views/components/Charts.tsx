@@ -2,6 +2,8 @@ import React, { useEffect, useState, useRef } from 'react';
 import Charts1 from '../../components/components/Charts1';
 import Charts2 from '../../components/components/Charts2';
 import Charts3 from '../../components/components/Charts3';
+import Charts4 from '../../components/components/Charts4';
+import Charts5 from '../../components/components/Charts5';
 import DivShow from '../../components/components/DivShow';
 import * as echarts from 'echarts';
 // import Icon, { AppstoreOutlined } from '@ant-design/icons';
@@ -431,13 +433,13 @@ const Charts: React.FC = () => {
           {/*  */}
           <div className={styles.div3}>
             <div className={styles.charts2}>
-                <Charts2 />
+                <Charts3 />
             </div>
             <div className={styles.charts2}>
-                <Charts2 />
+                <Charts4 />
             </div>
             <div className={styles.charts2}>
-                <Charts2 />
+                <Charts5 />
             </div>
           </div>
         </div>

@@ -26,7 +26,20 @@ const Charts1: React.FC = () => {
                     name:'A',
                     type:'bar',
                     barWidth: '15%',
-                    data:[800, 300, 200, 230, 180]
+                    data:[800, 300, 200, 230, 180],
+                    itemStyle: {
+                        normal: {
+                          color: new echarts.graphic.LinearGradient(1, 0, 0, 0, [{  
+                  // 四个数字分别对应 数组中颜色的开始位置，分别为 右，下，左，上。例如（1,0,0,0 ）代表从右边开始渐
+                  // 变。offset取值为0~1，0代表开始时的颜色，1代表结束时的颜色，柱子表现为这两种颜色的渐变。
+                            offset: 0,
+                            color: '#4d76ff'
+                          }, {
+                            offset: 1,
+                            color: '#80aaff'
+                          }]),
+                        }
+                      },
                 },
                 {
                     name:'B',
