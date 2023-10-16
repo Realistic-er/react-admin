@@ -6,12 +6,12 @@ import {
 import type { ColumnsType } from 'antd/es/table';
 import Adddata from '../../components/datamonitor/Adddata';
 import Paginationcom from '../../components/Paginationcom';
-import getdata from '../../utils/api/datamonitor';
+import { getdata, deletedata } from '../../utils/api/datamonitor';
 import styles from  '../../style/views/datamonitor.module.scss';
 interface DataType {
-  dataname: string;
-  dataage: number;
-  statusdata: string;
+  data_name: string;
+  data_age: number;
+  data_status: number;
   email: string;
   text: string;
 }
@@ -25,22 +25,22 @@ const Datamonitor: React.FC = () => {
         },
       {
         title: '名称',
-        dataIndex: 'dataname',
-        key: 'dataname',
+        dataIndex: 'data_name',
+        key: 'data_name',
         render: (text) => <a>{text}</a>,
       },
       {
         title: '年龄',
-        dataIndex: 'dataage',
-        key: 'dataage',
+        dataIndex: 'data_age',
+        key: 'data_age',
       },
       {
         title: '状态',
-        dataIndex: 'statusdata',
-        key: 'statusdata',
-        render: (_, { statusdata }) => (
-            <Tag color={ statusdata === '1' ? 'blue' : 'red' }>
-                { statusdata === '1' ? '正常' : '停用' }
+        dataIndex: 'data_status',
+        key: 'data_status',
+        render: (_, { data_status }) => (
+            <Tag color={ data_status === 1 ? 'blue' : 'red' }>
+                { data_status === 1 ? '正常' : '停用' }
             </Tag>
         ),
       },
@@ -65,8 +65,8 @@ const Datamonitor: React.FC = () => {
               <Button type="link" onClick={() => edit(record)}>编辑</Button>
               <Popconfirm
                   title="删除"
-                  description={'确认要删除'+ `${record.dataname}`+'?'}
-                  onConfirm={confirm}
+                  description={'确认要删除'+ `${record.data_name}`+'?'}
+                  onConfirm={() => confirm(record)}
                   onCancel={cancel}
                   icon={<QuestionCircleOutlined style={{ color: 'red' }} />}
               > 
@@ -78,20 +78,36 @@ const Datamonitor: React.FC = () => {
       },
     ];
     const [data, setData] = useState([]);
+    const [total, setTotal] = useState();
+    const getdatasource = () => {
+      getdata(1, 10).then((Response) => {
+        setData(Response.data.results);
+        setTotal(Response.data.total);
+      })
+    }
     useEffect(() => {
-        getdata().then((Response) => {
-          setData(Response.data.data.data)
-        })
+      getdatasource()
     }, []);
-    const confirm = () =>{
-        message.success({
-          content: '删除成功',
-        });
+    const confirm = (record:any) =>{
+      const { id } = record;
+      deletedata({ id }).then((res) => {
+        console.log(res);
+        if (res.data.code === 200) {
+          message.success({
+            content: '删除成功',
+          });
+        } else {
+          message.error({
+            content: '删除s',
+          });
+        }
+      })
+      
     };
     const cancel = () =>{
-        message.warning({
-          content: '取消删除',
-        });
+      message.warning({
+        content: '取消删除',
+      });
     };
     const changePagination = (page:number, pageSize:number) =>{
       message.success({
@@ -100,6 +116,7 @@ const Datamonitor: React.FC = () => {
     };
     const edit = (record:DataType) => {
       (childRef.current as any).showModalEdit(record);
+      console.log(record)
     };
     const clickBtn = () =>{
       (childRef.current as any).showModal();
@@ -110,14 +127,14 @@ const Datamonitor: React.FC = () => {
           <Button type="primary" onClick={clickBtn}>新增</Button>
         </div>
         <div className={styles.datamonitor}>
-          <Table columns={columns} rowKey={"dataname"} scroll={{ y: 600 }}
+          <Table columns={columns} rowKey={"data_name"} scroll={{ y: 600 }}
           dataSource={data} pagination={false} bordered={true}/>
           {/*  */}
           <Adddata ref={childRef} />
           {/*  */}
         </div>
         <div className={styles.page}>
-          <Paginationcom onChange={changePagination}/>
+          <Paginationcom total={total} onChange={changePagination}/>
         </div>
       </div>
     )

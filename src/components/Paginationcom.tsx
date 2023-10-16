@@ -1,15 +1,26 @@
-import React from 'react';
+import React, { useState, forwardRef, useImperativeHandle, useEffect } from 'react';
 import { Pagination } from 'antd';
 
-const Paginationcom: React.FC<any> = (props) => {
-    const onChange = (page:number, pageSize:number) => {
-        props.onChange(page, pageSize);
-    };
-    return (
-        <Pagination defaultCurrent={1} total={500} onChange={onChange} />
-    )
-}
+const Paginationcom: React.FC<any> = forwardRef(
+    (props, ref) => {
+        useImperativeHandle(ref, () => {
+            return {
+                defaultCurrent: defaultCurrent,
+                defaultPageSize: defaultPageSize,
+            };
+          });
+        const onChange = (page:number, pageSize:number) => {
+            props.onChange(page, pageSize);
+        };
+        const defaultCurrent = 1;
+        const defaultPageSize = 10;
+        return (
+            <Pagination defaultCurrent={defaultCurrent} defaultPageSize={defaultPageSize}
+            total={props.total} onChange={onChange} />
+        )
+    }
+);
 
-
+Paginationcom.displayName = 'Paginationcom';
 
 export default Paginationcom;

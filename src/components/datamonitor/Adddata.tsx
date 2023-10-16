@@ -1,6 +1,6 @@
 import React, { useState, forwardRef, useImperativeHandle, useEffect } from 'react';
 import { Modal, Form, Input, message, Radio } from 'antd';
-
+import { adddata, updatedata } from '../../utils/api/datamonitor';
 const Adddata: React.FC<any> = forwardRef(
     (props, ref) => {
       useImperativeHandle(ref, () => {
@@ -11,6 +11,8 @@ const Adddata: React.FC<any> = forwardRef(
       });
         const [isModalOpen, setIsModalOpen] = useState(false);
         const [recordobject, setIsRecord] = useState({});
+        const [isEdit, setIsEdit] = useState(false);
+        const [id, setId] = useState();
         const [form] = Form.useForm();
         useEffect(() => {
           form.setFieldsValue({...recordobject})
@@ -23,16 +25,48 @@ const Adddata: React.FC<any> = forwardRef(
         const showModalEdit = (record:any) => {
           setIsModalOpen(true);
           setIsRecord(record);
+          setIsEdit(true);
+          setId(record.id);
         };
       
         const handleOk = () => {
           form.validateFields()
             .then((values) => {
-              message.success({
-                content: '提交成功'
-              })
-              form.resetFields();
-              setIsModalOpen(false);
+              if (isEdit) {
+                const { data_name, data_age, data_status, email, text} = values;
+                updatedata({id: id, data_name, data_age, data_status, email, text}).then((res) => {
+                  if (res.data.code === 200) {
+                    message.success({
+                      content: '提交成功'
+                    });
+                    form.resetFields();
+                    setIsModalOpen(false);
+                    setIsEdit(false);
+                  } else {
+                    message.error({
+                      content: '修改失败'
+                    });
+                  }
+                })
+              } else {
+                const {data_name, data_age, data_status, email, text} = values;
+                adddata({data_name, data_age, data_status, email, text}).then((res) => {
+                  if (res.data.code === 200) {
+                    message.success({
+                      content: '提交成功'
+                    });
+                    form.resetFields();
+                    setIsModalOpen(false);
+                  } else {
+                    message.error({
+                      content: '添加失败'
+                    });
+                  }
+                })
+              }
+              
+              
+              
             })
             .catch((errorInfo) => {
               message.error({
@@ -69,7 +103,7 @@ const Adddata: React.FC<any> = forwardRef(
             >
               <Form.Item
               label="姓名"
-              name="dataname"
+              name="data_name"
               rules={[{ required: true, message: '姓名不能为空!' }]}
               >
                 <Input placeholder="请输入你的姓名"/>
@@ -77,7 +111,7 @@ const Adddata: React.FC<any> = forwardRef(
       
               <Form.Item
               label="年龄"
-              name="dataage"
+              name="data_age"
               rules={[{ pattern: new RegExp(/^[1-9]\d*$/, "g"), required: true, message: '年龄不能为空且为数字!' }]}
               >
                 <Input placeholder="请输入你的年龄"/>
@@ -85,12 +119,12 @@ const Adddata: React.FC<any> = forwardRef(
 
               <Form.Item
               label="状态"
-              name="statusdata"
+              name="data_status"
               rules={[{ required: true, message: '状态不能为空!' }]}
               >
                 <Radio.Group>
-                    <Radio value={'1'}>正常</Radio>
-                    <Radio value={'2'}>停用</Radio>
+                    <Radio value={1}>正常</Radio>
+                    <Radio value={2}>停用</Radio>
                 </Radio.Group>
               </Form.Item>
 

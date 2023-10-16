@@ -16,8 +16,7 @@ const Addprocess: React.FC<any> = forwardRef(
           showModal: showModal,
           showModalEdit: showModalEdit,
         };
-      });
-        const [isModalOpen, setIsModalOpen] = useState(false);
+      });        const [isModalOpen, setIsModalOpen] = useState(false);
         const [recordobject, setIsRecord] = useState({});
         const [fileList, setFileList] = useState<UploadFile[]>([]);
         const [form] = Form.useForm();

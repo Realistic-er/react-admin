@@ -34,10 +34,41 @@ Mock.mock('/data/datamonitor', 'get', () => (
   }
 ));
 
-// 登录
-export default function getdata() {
+// 获取data分页数据
+export function getdata(currentPage:any, pageSize:any) {
   return request({
-    url: '/data/datamonitor',
+    url: '/getdatamonitor',
     method: 'get',
+    params: {
+      currentPage,
+      pageSize,
+    }
+  });
+}
+
+// 添加data数据
+export function adddata(data:any) {
+  return request({
+    url: '/adddatamonitor',
+    method: 'post',
+    data
+  });
+}
+
+// 编辑数据
+export function updatedata(data:any) {
+  return request({
+    url: '/updatedatamonitor',
+    method: 'put',
+    data
+  });
+}
+
+// 删除数据
+export function deletedata(data:any) {
+  return request({
+    url: '/deletedatamonitor',
+    method: 'delete',
+    data
   });
 }

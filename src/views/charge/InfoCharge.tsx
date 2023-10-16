@@ -124,6 +124,7 @@ const Infocharge: React.FC = () => {
           render: (_, record) => (
             <Space size="middle">
                 {/* <a>Invite {record.name}</a>
+                           
                 <a>Delete</a> */}
                 <Button type="link" onClick={() => edit(record)}>编辑</Button>
                 <Popconfirm

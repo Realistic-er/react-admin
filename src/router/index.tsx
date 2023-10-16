@@ -10,6 +10,7 @@ const LayoutMenu = lazy(() => import('../pages/Layout/LayoutMenu'));
 const Notfound = lazy(() => import('../pages/Error/Notfound'));
 const Notpermission = lazy(() => import('../pages/Error/Notpermission'));
 
+
 const routes:React.FC<any> = () => {
     return (
         <Router>
@@ -18,23 +19,8 @@ const routes:React.FC<any> = () => {
                     <Route path=''  Component={LoginMoudle}></Route>
                     <Route path='/layout' Component={LayoutMenu}>
                         {
-                           routeconfig.map((v) => {
-                                if (v.children) {
-                                    return <Route element={<Private Component={v.component} />}
-                                    path={v.key} key={v.key}>
-                                        {
-                                            v.children.map((i) => {
-                                                return <Route
-                                                Component={i.component}
-                                                path={i.key} key={i.key}/>
-                                            })
-                                        }
-                                    </Route>
-                                } else {
-                                    return <Route
-                                    element={<Private Component={v.component} />}
-                                    path={v.key} key={v.key}/>
-                                }
+                           routeconfig.map((v:any) => {
+                                return <Route Component={v.component} path={v.child_url} key={v.child_url}/>
                            })
                         }
                     </Route>

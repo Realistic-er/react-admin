@@ -5,7 +5,8 @@ import {
     selectAccount,
     updateAccount,
   } from "../../store/reducer/saveaccount";
-import { Button, Form, Input } from 'antd';
+import { Button, Form, Input, message } from 'antd';
+import { login } from '../../utils/api/login';
 import styles from  '../../style/pages/LoginMoudle.module.scss';
 
 
@@ -25,9 +26,21 @@ const onFinish = (values: any) => {
     const onSubmit = (errorInfo: any) => {
         form.validateFields()
             .then((values) => {
-                dispatch(updateAccount(values.username));
-                window.localStorage.setItem('account', values.username);
-                navigate('/layout');
+                const account = values.username;
+                const password = values.password;
+                dispatch(updateAccount(account));
+                // window.localStorage.setItem('account', account);
+                login(account, password).then((res:any) => {
+                    
+                    const {token, menu} = res.data;
+                    window.localStorage.setItem('token', token);
+                    window.localStorage.setItem('menu', JSON.stringify(menu));
+                    message.success({
+                        content: '登录成功'
+                    })
+                    navigate('/layout');
+                })
+                
             })
             .catch((errorInfo) => {
                 /*
