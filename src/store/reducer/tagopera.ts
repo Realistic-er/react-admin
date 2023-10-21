@@ -1,44 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const routearray  = [
-    {
-        key: '/layout/monitor/datamonitor',
-        label: '数据监控',
-    },
-    {
-        key: '/layout/monitor/partmonitor',
-        label: '部门监控',
-    },
-    {
-        key: '/layout/monitor/processmonitor',
-        label: '流程监控',
-    },
-    {
-        key: '/layout/monitor/salemonitor',
-        label: '货品监控',
-    },
-    {
-        key: '/layout/charge/sourcematerial',
-        label: '素材管理',
-    },
-    {
-        key: '/layout/charge/infocharge',
-        label: '信息管理',
-    },
-    {
-        key: '/layout/components/animation',
-        label: '动画',
-    },
-    {
-        key: '/layout/components/charts',
-        label: '图表',
-    },
-];
 const initialState = {
     tagarray: [
         {
-            key: '/layout',
-            label: '首页',
+            child_path: '/layout',
+            child_name: '首页',
         }
     ],
 };
@@ -49,21 +15,26 @@ export const tagsSlice = createSlice({
     // reducer函数 state当前组件的数据 
     //第二个参数为{payload:{},type:"""} 想想就写法或者vuex
     updateTagArray(state, actions) {
+        const data = actions.payload;
         const index = state.tagarray.findIndex(item => {
-            return item.key === actions.payload;
+            return item.child_path === data.child_path;
         })
         if (index === -1) {
-            const tag = routearray.find((ele) => {
-                return ele.key === actions.payload;
-            });
+            const tag = {
+                child_path: '',
+                child_name: '',
+            }
+            tag.child_name = data.child_name;
+            tag.child_path = data.child_path;
             if (tag !== undefined) state.tagarray.push(tag);
         }
     },
     // 删除标签
     deleteTagArray(state, actions) {
+        console.log(actions)
         // const index = state.tagarray.indexOf(actions.payload);
         const index = state.tagarray.findIndex(item => {
-            return item.key === actions.payload.key;
+            return item.child_path === actions.payload.child_path;
         })
         state.tagarray.splice(index, 1);
     },

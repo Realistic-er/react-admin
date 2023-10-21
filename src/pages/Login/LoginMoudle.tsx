@@ -31,7 +31,7 @@ const onFinish = (values: any) => {
                 dispatch(updateAccount(account));
                 // window.localStorage.setItem('account', account);
                 login(account, password).then((res:any) => {
-                    
+                    console.log(res)
                     const {token, menu} = res.data;
                     window.localStorage.setItem('token', token);
                     window.localStorage.setItem('menu', JSON.stringify(menu));

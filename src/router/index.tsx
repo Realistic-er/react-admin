@@ -2,7 +2,7 @@ import React, { lazy, Suspense, } from "react";
 import {
 BrowserRouter as Router, Route, Routes, Navigate
 } from 'react-router-dom';
-import routeconfig from '../utils/router/RouteConfig';
+import { routeconfig } from '../utils/router/RouteConfig';
 import Private from '../components/Authroute';
 import SpinLoading from '../components/Spin';
 const LoginMoudle = lazy(() => import('../pages/Login/LoginMoudle'));

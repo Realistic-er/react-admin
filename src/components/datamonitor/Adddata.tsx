@@ -19,6 +19,7 @@ const Adddata: React.FC<any> = forwardRef(
         }, [recordobject])
         const showModal = () => {
           setIsModalOpen(true);
+          setIsEdit(false);
           form.resetFields();
         };
 
@@ -36,6 +37,7 @@ const Adddata: React.FC<any> = forwardRef(
                 const { data_name, data_age, data_status, email, text} = values;
                 updatedata({id: id, data_name, data_age, data_status, email, text}).then((res) => {
                   if (res.data.code === 200) {
+                    props.getdatasource();
                     message.success({
                       content: '提交成功'
                     });
@@ -52,6 +54,7 @@ const Adddata: React.FC<any> = forwardRef(
                 const {data_name, data_age, data_status, email, text} = values;
                 adddata({data_name, data_age, data_status, email, text}).then((res) => {
                   if (res.data.code === 200) {
+                    props.getdatasource();
                     message.success({
                       content: '提交成功'
                     });
@@ -88,7 +91,7 @@ const Adddata: React.FC<any> = forwardRef(
         };
       
         return (
-          <Modal title="创建" open={isModalOpen} okText="提交" cancelText="取消" destroyOnClose={true}
+          <Modal title={isEdit ? '编辑' : '创建'} open={isModalOpen} okText="提交" cancelText="取消" destroyOnClose={true}
             onOk={handleOk} onCancel={handleCancel} forceRender>
               <Form
               name="basic"

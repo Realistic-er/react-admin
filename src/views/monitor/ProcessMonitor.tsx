@@ -11,11 +11,11 @@ import styles from  '../../style/views/datamonitor.module.scss';
 
 interface DataType {
   key: string;
-  processname: string;
+  process_name: string;
   process: string[];
-  statusprocess: number;
+  process_status: number;
   email: string;
-  processimage: string[];
+  process_image: string[];
   text: string;
 }
 
@@ -24,6 +24,7 @@ interface DataType {
 const Processmonitor: React.FC = () => {
     const [data, setData] = useState([]);
     const childRefProcess = useRef();
+    const [total, setTotal] = useState();
     const columns: ColumnsType<DataType> = [
         {
             title: '序号',
@@ -32,15 +33,15 @@ const Processmonitor: React.FC = () => {
         },
         {
           title: '负责人',
-          dataIndex: 'processname',
-          key: 'processname',
-          render: (_, { processname }) => {
+          dataIndex: 'process_name',
+          key: 'process_name',
+          render: (_, { process_name }) => {
             let color = '';
             let text = '';
-            if (processname === '1') {
+            if (process_name === '1') {
                 color = 'grey'
                 text = 'Jack'
-            } else if (processname === '2') {
+            } else if (process_name === '2') {
                 color = 'green'
                 text = 'Lucy'
             } else {
@@ -51,32 +52,34 @@ const Processmonitor: React.FC = () => {
           }, width: 100,},
         {
           title: '责任',
-          dataIndex: 'process',
-          key: 'process',
-          render: (_, { process }) => (
-            <>
-                {process.map((process, index) => {
-                    let text = '';
-                    if (process === '1') {
-                        text = '监督'
-                    } else if (process === '2') {
-                        text = '审核'
-                    } else {
-                        text = '执行'
-                    }
-                    return (
-                        <Tag color='blue' key={process}>{text}</Tag>
-                    );
-                })}
-            </>
-       ),width: 200,},
+          dataIndex: 'process_part',
+          key: 'process_part',
+          width: 100,
+      //     render: (_, { process }) => (
+      //       <>
+      //           {process.map((process, index) => {
+      //               let text = '';
+      //               if (process === '1') {
+      //                   text = '监督'
+      //               } else if (process === '2') {
+      //                   text = '审核'
+      //               } else {
+      //                   text = '执行'
+      //               }
+      //               return (
+      //                   <Tag color='blue' key={process}>{text}</Tag>
+      //               );
+      //           })}
+      //       </>
+      //  ),width: 200,
+      },
         {
           title: '进度',
-          dataIndex: 'statusprocess',
-          key: 'statusprocess',
+          dataIndex: 'process_status',
+          key: 'process_status',
           width: 100,
-          render: (_, { statusprocess }) => (
-            <Progress percent={statusprocess} size="small" />
+          render: (_, { process_status }) => (
+            <Progress percent={process_status} size="small" />
           )
         },
         {
@@ -85,15 +88,15 @@ const Processmonitor: React.FC = () => {
           key: 'email',
           width: 180,
         },
-        { title: '现场图片', dataIndex: 'processimage', key: 'processimage', render: (_, { processimage }) => (
-              <>
-                  {processimage.map((processimage, index) => {
-                  return (
-                      <img style={{width: '50px', marginRight: '10px'}} src={processimage} key={index} />
-                  );
-                  })}
-              </>
-         ), width: 250, },
+        // { title: '现场图片', dataIndex: 'process_image', key: 'process_image', render: (_, { process_image }) => (
+        //       <>
+        //           {process_image.map((process_image, index) => {
+        //           return (
+        //               <img style={{width: '50px', marginRight: '10px'}} src={process_image} key={index} />
+        //           );
+        //           })}
+        //       </>
+        //  ), width: 250, },
           {
               title: '描述',
               dataIndex: 'text',
@@ -110,7 +113,7 @@ const Processmonitor: React.FC = () => {
                     <Button type="link" onClick={() => edit(record)}>编辑</Button>
                     <Popconfirm
                         title="删除"
-                        description={'确认要删除'+ `${record.processname}`+'?'}
+                        description={'确认要删除'+ `${record.process_name}`+'?'}
                         onConfirm={confirm}
                         onCancel={cancel}
                         icon={<QuestionCircleOutlined style={{ color: 'red' }} />}
@@ -135,10 +138,14 @@ const Processmonitor: React.FC = () => {
     const edit = (record:DataType) => {
       (childRefProcess.current as any).showModalEdit(record);
     };
+    const getdatasource = () => {
+      getprocess(1, 10).then((res) => {
+        setData(res.data.results);
+        setTotal(res.data.total);
+      })
+    };
     useEffect(() => {
-        getprocess().then((Response) => {
-          setData(Response.data.data.data)
-        })
+      getdatasource()
     }, []);
     const changePagination = (page:number, pageSize:number) =>{
         message.success({

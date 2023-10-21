@@ -50,9 +50,13 @@ Mock.mock('/data/processmonitor', 'get', () => (
 ));
 
 // 登录
-export default function getprocess() {
+export default function getprocess(currentPage:any, pageSize:any) {
   return request({
-    url: '/data/processmonitor',
+    url: '/getprocessmonitor',
     method: 'get',
+    params: {
+      currentPage,
+      pageSize,
+    }
   });
 }

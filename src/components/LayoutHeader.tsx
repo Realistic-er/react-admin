@@ -22,8 +22,8 @@ import { Button, Avatar, Tag, Space, Popover, Image } from 'antd';
 import styles from  '../style/components/layoutheader.module.scss';
 
 interface tageType {
-    label: string,
-    key: string,
+    child_path: string,
+    child_name: string,
 }
 const LayoutHeader:React.FC = () => {
     const dispatch = useDispatch();
@@ -37,9 +37,9 @@ const LayoutHeader:React.FC = () => {
     const close = (e:React.MouseEvent<HTMLElement>,item:tageType) => {
         e.preventDefault();
         const currentpath = location.pathname;
-        if (currentpath === item.key) {
+        if (currentpath === item.child_path) {
             const index = tagArray.indexOf(item);
-            const path:string = tagArray[index-1].key;
+            const path:string = tagArray[index-1].child_path;
             navigate(path);
             dispatch(deleteTagArray(item));
         } else {
@@ -47,7 +47,7 @@ const LayoutHeader:React.FC = () => {
         }
     };
     const jump = (item:tageType) => {
-        navigate(item.key);
+        navigate(item.child_path);
     };
     const content = (
         // <img style={{width:'100px'}} src={require('../assets/wechat.jpg')}></img>
@@ -81,9 +81,9 @@ const LayoutHeader:React.FC = () => {
             <div className={styles.bottom}>
                 {
                     tagArray.map((item:tageType,index:number) => {
-                        return <Tag key={index} closable={item.label === '首页' ? false : true} color={item.key === location.pathname ? '#108ee9' : 'purple'}
+                        return <Tag key={index} closable={item.child_name === '首页' ? false : true} color={item.child_path === location.pathname ? '#108ee9' : 'purple'}
                         onClick={() => jump(item)} onClose={(e) => close(e,item)}>
-                        {item.label}
+                        {item.child_name}
                       </Tag>
                     })
                 }
